@@ -26,10 +26,11 @@ void sacarprecios(map<string, int>&);
 vector<int> opcionespeli(map<int, vector<sala>>);
 int eleccionpelicula(map<int, vector<sala>>, vector<int> (map<int, vector<sala>>));
 int eleccionsalayhora(map<int, vector<sala>>, int);
-sala busquedasala(map<int, vector<sala>>, int, int);
 void eleccionasiento(map<int, vector<sala>>&);
 void guardarsalas(map<int, vector<sala>>);
 void sacarsalas(map<int, vector<sala>>&);
+void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosala, bool (int, sala, map<string, int>), map<string, int>);
+bool pagodeboleta(int, sala, map<string, int>);
 
 int main()
 {
@@ -49,6 +50,7 @@ int main()
         cine.clear();
         precioasientos.clear();
         sacarinfocine(cine);
+        sacarsalas(cine);
         sacarprecios(precioasientos);
         opci=opcini();
 
@@ -90,7 +92,9 @@ int main()
                     if (salaescogida==-1){
                         continue;
                     }
-
+                    eleccionasiento(cine, IDpeliescogida, salaescogida, pagodeboleta, precioasientos);
+                    guardarpeliculas(cine);
+                    guardarsalas(cine);
                 }
                 else if (opcu==2){
                     cout << "\n...HASTA LUEGO, USUARIO..." << endl;
@@ -484,7 +488,7 @@ void sacarinfocine(map<int, vector<sala>> &cine){
                 aux2="";
                 if (linea[icont]==')'){
                     sala nuevasala(stoi(infosala[1]), peliaguardar, infosala[0], stoi(infosala[6]), stoi(infosala[2]));
-                    nuevasala.modificarAsientosdisp(stoi(infosala[0]), stoi(infosala[1]), stoi(infosala[2]));
+                    nuevasala.modificarAsientosdisp(stoi(infosala[3]), stoi(infosala[4]), stoi(infosala[5]));
                     cine[peliaguardar.obtenerID()].push_back(nuevasala);
                     icont+=2;
                     infosala.clear();
@@ -686,18 +690,6 @@ int eleccionsalayhora(map<int, vector<sala>> cine, int IDpeliculaescogida){
     return opcsala;
 }
 
-sala busquedasala(map<int, vector<sala>> cine, int IDpelicula, int numerosala){
-
-    vector<sala>::iterator it;
-    it=cine[IDpelicula].begin();
-    for (; it!= cine[IDpelicula].end(); it++){
-        if ((*it).obtenerNumerosala() == numerosala){
-            break;
-        }
-    }
-    return *it;
-}
-
 void guardarsalas(map<int, vector<sala>> cine){
 
     ofstream outfile;
@@ -715,7 +707,7 @@ void guardarsalas(map<int, vector<sala>> cine){
                  exit(1);
                }
             for (unsigned int i=0; i<asientos.size(); i++){
-                for (unsigned int j=0; j<asientos[i].size(); j++){
+                for (int j=asientos[i].size()-1; j>=0; j--){
                     auxtxt=auxtxt+asientos[i][j]+" ";
                 }
                 auxtxt=auxtxt+"\n";
@@ -744,11 +736,14 @@ void sacarsalas(map<int, vector<sala>> &cine){
             while (getline(infile, linea)){
                 vector<char> fila;
                 for (unsigned int i=0; i<linea.size(); i++){
-                    fila.push_back(linea[i]);
+                    if (i%2==0){
+                       fila.push_back(linea[i]);
+                    }
                 }
                 asientos.push_back(fila);
             }
             (*it).asignarAsientos(asientos);
+            (*it).actualizarCantasientos();
             infile.close();
 
         }
@@ -756,8 +751,122 @@ void sacarsalas(map<int, vector<sala>> &cine){
     }
 }
 
+void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosala, bool pagodeboleta(int, sala, map<string, int>), map<string, int> precioasientos){
+    /* Esta funcion le pide al usuario que ingrese la fila y el numero del asiento que quiere comprar,
+     * y luego de verificar que esté desocupado, procede a realizarse la compra usando la funcion "pagodeboleta", en la cual
+     * se le pedirá al usuario que ingrese el dinero y se le entregará la devuelta, informándole la cantidad de billetes
+     * y el faltante.
+     */
+    vector<sala>::iterator it;
+    it=cine[IDpelicula].begin();
+    for (; it!= cine[IDpelicula].end(); it++){
+        if ((*it).obtenerNumerosala() == numerosala){
+            break;
+        }
+    }
+    (*it).imprimirAsientos();
+    char letra;
+    cout << "Por favor escoja la fila del asiento que desea (solo letras mayusculas): ";
+    cin >> letra;
 
+    while (true){
+        if (letra>=(char)65 && letra<=(char)(((*it).obtenerCantidadasientos()/10)+64)){
+            break;
+        }
+        else{
+            cout << "Asegurese de ingresar una fila valida: ";
+            cin >> letra;
+        }
+    }
+    int numeroasiento;
+    cout << "Ahora ingrese un numero de asiento que se encuentre disponible o -1 para salir: ";
+    cin >> numeroasiento;
+    if (numeroasiento==-1){
+        return;
+    }
+    int posicionfila;
+    while (true){
+        posicionfila=((*it).obtenerCantidadasientos()/10)-(((int)letra)-64);
+        if (numeroasiento>0 && numeroasiento<=10 && (*it).obtenerAsientos()[posicionfila][numeroasiento-1]=='o'){
+            break;
+        }
+        else{
+            cout << "Asegurese de ingresar una numero de asiento valido: ";
+            cin >> letra;
+            if (numeroasiento==-1){
+                return;
+            }
+        }
+    }
+    if (pagodeboleta(posicionfila, *it, precioasientos)==true){
+        vector<vector<char>> nuevosasientos=(*it).obtenerAsientos();
+        nuevosasientos[posicionfila][numeroasiento-1]='x';
+        (*it).asignarAsientos(nuevosasientos);
+        (*it).actualizarCantasientos();
+        cout << "\nBoleta comprada con exito" << endl;
+    }
+    else {
+        return;
+    }
+}
 
+bool pagodeboleta(int fila, sala sala, map<string, int> precioasientos){
+    /* Esta funcion recibe el numero de la fila, convertido a su codigo para ser accedido desde el vector de vectores
+     * correspondiente a los asientos de la sala, y dependiendo de su ubicacion, se le asigna un precio a la boleta
+     * y se usa el algoritmo 1 de la practica 2 para hacer el procedimiento de devueltas
+     */
+    int precio;
+    string zona;
+    if (fila<(sala.obtenerCantidadasientos())/30){
+        precio=precioasientos["Vibrosound"];
+        zona="Vibrosound";
 
+    }
+    else if (fila>=(sala.obtenerCantidadasientos())/30 && fila<(sala.obtenerCantidadasientos())/15){
+        precio=precioasientos["Preferencial"];
+        zona="Preferencial";
+    }
+    else{
+          precio=precioasientos["General"];
+          zona="General";
+    }
+
+    cout << "\nEl precio de la boleta en el asiento escogido (Zona" << zona << ") es: " << precio << endl;
+    int dinero;
+    cout << "\nIngrese el dinero para pagar la boleta o -1 para salir: ";
+    cin >> dinero;
+
+    if (dinero==-1){
+        return false;
+    }
+    while (true){
+        if (dinero>=precio){
+            break;
+        }
+        else{
+            cout << "\nAsegurese de ingresar suficiente dinero para pagar: ";
+            cin >> dinero;
+            if (dinero==-1){
+                return false;
+            }
+        }
+    }
+
+    int sobrante=dinero-precio;
+
+    if (sobrante>0){
+        int denom[10]={50000,20000,10000,5000,2000,1000,500,200,100,50};
+        int canti[10]={};
+        cout << "\nEsta es su devuelta: " << endl;
+        for (int i=0; i<10 ; i++){
+            canti[i]=sobrante/denom[i];
+            sobrante=sobrante%denom[i];
+            cout << "Billetes de " << denom[i] << " : " << canti[i] << endl;
+        }
+        cout << "Faltante: " << dinero << endl;
+    }
+
+    return true;
+}
 
 

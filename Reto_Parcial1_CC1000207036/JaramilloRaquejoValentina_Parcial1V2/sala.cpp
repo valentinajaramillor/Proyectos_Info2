@@ -59,20 +59,22 @@ void sala::modificarAsientosdisp(int asientosgen, int asientospref, int asientos
     this->asientosdisp["Vibrosound"]=asientosvibro;
 }
 void sala::imprimirAsientos(){
-    char letra='J';
+    char letra;
+    letra=(char)((this->cantidadasientos/10)+64);
     cout << "\nA continuacion se muestran los asientos disponibles en la sala" << endl;
     cout << "x: Asiento ocupado         o: Asiento disponible\n" << endl;
 
-    for (unsigned int i=0; i<this->asientos.size()+1; i++){
+    for (unsigned int i=0; i<this->asientos.size(); i++){
         if (i==0){
             cout << "      ";
-            for (int j=this->asientos[i-1].size(); j>=1; j--){
+            for (int j=this->asientos[i].size(); j>=1; j--){
                 cout << j << "  ";
             }
+            cout << endl;
         }
-        cout << " " << letra << "    ";
-        for (unsigned int j=0; j<this->asientos[i-1].size(); j++){
-            cout << asientos[i][j] << " ";
+        cout << " " << letra << "     ";
+        for (unsigned int j=0; j<this->asientos[i].size(); j++){
+            cout << asientos[i][j] << "  ";
         }
         letra--;
         cout << endl;
@@ -87,19 +89,34 @@ void sala::asignarAsientos(vector<vector<char>> actualizado){
 void sala::actualizarCantasientos(){
     vector<vector<char>> asientos=this->asientos;
 
-    int contocupados=0;
+    int contdisp1=0;
+    int contdisp2=0;
+    int contdisp3=0;
+
     for (unsigned int i=0; i<asientos.size(); i++){
         for (unsigned int j=0; j<asientos[i].size(); j++){
-            if (i>=0 && i<(unsigned int)(this->cantidadasientos)/30){
+            if (i<(unsigned int)(this->cantidadasientos)/30){
+                if (asientos[i][j]=='o'){
+                    contdisp1++;
+                }
 
             }
-            else if (i>=(unsigned int)(this->cantidadasientos)/30 && i<(unsigned int)(this->cantidadasientos)/60){
-
+            else if (i>=(unsigned int)(this->cantidadasientos)/30 && i<(unsigned int)(this->cantidadasientos)/15){
+                if (asientos[i][j]=='o'){
+                    contdisp2++;
+                }
+            }
+            else{
+                if (asientos[i][j]=='o'){
+                    contdisp3++;
+                }
             }
 
         }
     }
-
+    this->asientosdisp["General"]=contdisp3;
+    this->asientosdisp["Preferencial"]=contdisp2;
+    this->asientosdisp["Vibrosound"]=contdisp1;
 }
 
 
