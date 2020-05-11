@@ -73,12 +73,13 @@ void sala::imprimirAsientos(){
             cout << endl;
         }
         cout << " " << letra << "     ";
-        for (unsigned int j=0; j<this->asientos[i].size(); j++){
+        for (int j=this->asientos[i].size()-1; j>=0; j--){
             cout << asientos[i][j] << "  ";
         }
         letra--;
         cout << endl;
     }
+    cout << "       ----------PANTALLA----------" << endl;
 }
 vector<vector<char>> sala::obtenerAsientos(){
     return this->asientos;

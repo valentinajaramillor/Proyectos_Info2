@@ -1,3 +1,3 @@
-1-Mision de rescate-Accion-120-16-(2D-4-19-40/40/39/120)-(3D-3-19-20/20/20/60)
-2-A mi altura-Infantil-70-7-(2D-5-19-0/20/39/120)
-3-Frozen-Infantil-120-7-(3D-5-13-20/18/20/60)
+1-Mision de rescate-Accion-120-16-(2D-1-19-40/40/40/120)
+2-A mi altura-Infantil-70-7-(2D-2-11-40/40/39/120)-(3D-3-13-20/20/18/60)
+3-Frozen-Infantil-120-16-(3D-4-10-40/40/40/120)
