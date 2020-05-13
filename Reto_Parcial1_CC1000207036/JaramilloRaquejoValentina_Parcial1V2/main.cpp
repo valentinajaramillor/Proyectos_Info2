@@ -428,7 +428,7 @@ bool ingresouser(string &cedulauser){
      * su cedula correctamente, la función devuelve true, lo que permite ingresar el ciclo de funcionamiento del perfil usuario.
      */
     int cedula;
-    cout << "\nIngrese su cedula o escriba -1 para salir: ";
+    cout << "\nPara registrar su compra, por favor ingrese su cedula o escriba -1 para salir: ";
     cin >> cedula;
 
     if (cedula==-1){
@@ -467,7 +467,7 @@ void registropeliculas(map<int, vector<sala>> &cine){
 
     bool validid=true;
 
-    cout << "Ingrese el ID de la pelicula (un numero entero positivo) o -1 para salir: ";
+    cout << "\nIngrese el ID de la pelicula (un numero entero positivo y no repetido) o -1 para salir: ";
     cin >> ID;
 
     if (ID==-1){
@@ -483,8 +483,8 @@ void registropeliculas(map<int, vector<sala>> &cine){
             }
         }
         if ( (!cin) || validid==false || ID<=0){
-            cout << "Asegurese de ingresar un ID valido (que no este repetido)" << endl;
-            cout << "Ingrese el ID de la pelicula (un numero entero positivo) o -1 para salir: ";
+            cout << "\nAsegurese de ingresar un ID valido" << endl;
+            cout << "\nIngrese el ID de la pelicula (un numero entero positivo y no repetido) o -1 para salir: ";
             cin.clear();
             cin.ignore();
             cin >> ID;
@@ -497,13 +497,13 @@ void registropeliculas(map<int, vector<sala>> &cine){
         }
     }
 
-    cout << "Ingrese el nombre de la pelicula: ";
+    cout << "\nIngrese el nombre de la pelicula: ";
     std::getline(std::cin >> std::ws, nombre);
-    cout << "Ingrese el genero de la pelicula: ";
+    cout << "\nIngrese el genero de la pelicula: ";
     cin >> genero;
-    cout << "Ingrese la duracion en minutos de la pelicula: ";
+    cout << "\nIngrese la duracion en minutos de la pelicula: ";
     cin >> duracionmin;
-    cout << "Ingrese la clasificacion de la pelicula: ";
+    cout << "\nIngrese la clasificacion de la pelicula (sin el +): ";
     cin >> clasificacion;
 
     // Se crea el objeto pelicula y se le asigna su información como atributos
@@ -516,10 +516,10 @@ void registropeliculas(map<int, vector<sala>> &cine){
     cout << "1. Solo 2D" << endl;
     cout << "2. Solo 3D" << endl;
     cout << "3. 2D y 3D\n" << endl;
-    cout << "Ingrese el numero de la opcion deseada o 0 para salir: " << endl;
+    cout << "Ingrese el numero de la opcion deseada o -1 para salir: " << endl;
     cin >> opctipo;
 
-    if (opctipo==0){  // Se sale de la función y esto provoca que termine el proceso de registro de peliculas
+    if (opctipo==-1){  // Se sale de la función y esto provoca que termine el proceso de registro de peliculas
         return;
     }
 
@@ -528,13 +528,13 @@ void registropeliculas(map<int, vector<sala>> &cine){
         cin.clear();
         cin.ignore();
         cin >> opctipo;
-        if (opctipo==0){
+        if (opctipo==-1){
             return;
         }
     }
 
     if (opctipo==1 || opctipo==3){
-        cout << "Ingrese el numero de la sala 2D en la cual se va a proyectar la pelicula (numero entero positivo) o -1 para salir: ";
+        cout << "\nIngrese el numero de la sala 2D en la cual se va a proyectar la pelicula (numero entero positivo) o -1 para salir: ";
         cin >> numerosala;
 
         if (numerosala==-1){
@@ -552,9 +552,9 @@ void registropeliculas(map<int, vector<sala>> &cine){
                     }
                 }
             }
-            if (validnumero==false || numerosala<=0){
-                cout << "Asegurese de ingresar un numero de sala valido (que no este repetido)" << endl;
-                cout << "Ingrese el numero de la sala 2D en la cual se va a proyectar la pelicula (numero entero positivo) o -1 para salir: ";
+            if (!cin || validnumero==false || numerosala<=0){
+                cout << "\nAsegurese de ingresar un numero de sala valido (que no este repetido)" << endl;
+                cout << "\nIngrese el numero de la sala 2D en la cual se va a proyectar la pelicula (numero entero positivo) o -1 para salir: ";
                 cin.clear();
                 cin.ignore();
                 cin >> numerosala;
@@ -566,13 +566,55 @@ void registropeliculas(map<int, vector<sala>> &cine){
                 break;
             }
         }
-        cout << "Ingrese la hora a la cual se va a proyectar la pelicula (formato 24 hr): ";
+        cout << "\nIngrese la hora a la cual se va a proyectar la pelicula (formato 24 hr - sin minutos) o -1 para salir: ";
         cin >> hora;
-        cout << "Cual sera la cantidad de asientos de la sala?" << endl;
+
+        if (hora==-1){
+            return;
+        }
+
+        while (true){
+            if (!cin || hora<0 || hora>23){
+                cout << "\nAsegurese de ingresar una hora valida" << endl;
+                cout << "\nIngrese la hora a la cual se va a proyectar la pelicula (formato 24 hr - sin minutos) o -1 para salir: ";
+                cin.clear();
+                cin.ignore();
+                cin >> hora;
+                if (hora==-1){
+                    return;
+                }
+            }
+            else{
+                break;
+            }
+        }
+
+        cout << "\nCual sera la cantidad de asientos de la sala?" << endl;
         cout << "1. 120" << endl;
         cout << "2. 60" << endl;
-        cout << "Ingrese el numero de la opcion deseada: ";
+        cout << "Ingrese el numero de la opcion deseada o -1 para salir: ";
         cin >> cantidadasientos;
+
+        if (cantidadasientos==-1){
+            return;
+        }
+
+        while (true){
+            if (!cin || cantidadasientos<1 || cantidadasientos>2){
+                cout << "\nAsegurese de ingresar una opcion valida" << endl;
+                cout << "\nIngrese el numero de la opcion deseada o -1 para salir: ";
+                cin.clear();
+                cin.ignore();
+                cin >> cantidadasientos;
+                if (cantidadasientos==-1){
+                    return;
+                }
+            }
+            else{
+                break;
+            }
+        }
+
         if (cantidadasientos==1){
 
             // Se crea el objeto sala y se le asigna la información, para luego ingresarlo en el mapa "cine"
@@ -587,8 +629,10 @@ void registropeliculas(map<int, vector<sala>> &cine){
         }
 
     }
+    cout << "\n***** Pelicula y sala registradas con exito *****" << endl;
+
     if (opctipo==2 || opctipo==3){
-        cout << "Ingrese el numero de la sala 3D en la cual se va a proyectar la pelicula (numero entero positivo) o -1 para salir: ";
+        cout << "\nIngrese el numero de la sala 3D en la cual se va a proyectar la pelicula (numero entero positivo) o -1 para salir: ";
         cin >> numerosala;
         if (numerosala==-1){
             return;
@@ -606,8 +650,8 @@ void registropeliculas(map<int, vector<sala>> &cine){
                 }
             }
             if (validnumero==false || numerosala<=0){
-                cout << "Asegurese de ingresar un numero de sala valido (que no este repetido)" << endl;
-                cout << "Ingrese el numero de la sala 3D en la cual se va a proyectar la pelicula (numero entero positivo) o -1 para salir: ";
+                cout << "\nAsegurese de ingresar un numero de sala valido (que no este repetido)" << endl;
+                cout << "\nIngrese el numero de la sala 3D en la cual se va a proyectar la pelicula (numero entero positivo) o -1 para salir: ";
                 cin.clear();
                 cin.ignore();
                 cin >> numerosala;
@@ -619,9 +663,9 @@ void registropeliculas(map<int, vector<sala>> &cine){
                 break;
             }
         }
-        cout << "Ingrese la hora a la cual se va a proyectar la pelicula (formato 24 hr): ";
+        cout << "\nIngrese la hora a la cual se va a proyectar la pelicula (formato 24 hr): ";
         cin >> hora;
-        cout << "Cual sera la cantidad de asientos de la sala?" << endl;
+        cout << "\nCual sera la cantidad de asientos de la sala?" << endl;
         cout << "1. 120" << endl;
         cout << "2. 60" << endl;
         cout << "Ingrese el numero de la opcion deseada: ";
@@ -639,6 +683,7 @@ void registropeliculas(map<int, vector<sala>> &cine){
             cine[ID].push_back(nuevasala);
         }
     }
+    cout << "\n***** Pelicula y sala registradas con exito *****" << endl;
 }
 
 void guardarpeliculas(map<int, vector<sala>> cine){
@@ -750,7 +795,7 @@ void registroprecios(map<string, int> &precioasientos){
      */
     int opcprecio;
     int precio;
-    cout << "Escoja el tipo de asiento al cual le quiere asignar o modificar el precio" << endl;
+    cout << "\nEscoja el tipo de asiento al cual le quiere asignar o modificar el precio" << endl;
     cout << "1. Asiento General." << endl;
     cout << "2. Asiento Preferencial." << endl;
     cout << "3. Asiento Vibrosound." << endl;
@@ -771,8 +816,29 @@ void registroprecios(map<string, int> &precioasientos){
             return;
         }
     }
-    cout << "Ingrese el precio que quiere asignarle: ";
+    cout << "\nIngrese el precio que quiere asignarle o -1 para salir: ";
     cin >> precio;
+
+    if (precio==-1){
+        return;
+    }
+
+    while (true){
+
+        if ( (!cin) || precio<=0){
+            cout << "\nAsegurese de ingresar un precio valido (numero positivo mayor a cero)" << endl;
+            cout << "\nIngrese el precio que quiere asignarle o -1 para salir: ";
+            cin.clear();
+            cin.ignore();
+            cin >> precio;
+            if (precio==-1){
+                return;
+            }
+        }
+        else{
+            break;
+        }
+    }
 
     // A continuacion se procede a guardar el nuevo precio en el mapa de precio de los asientos
     if (opcprecio==1){
@@ -784,7 +850,7 @@ void registroprecios(map<string, int> &precioasientos){
     else {
         precioasientos["Vibrosound"]=precio;
     }
-
+    cout << "\n***** Precio guardado con exito *****" << endl;
 }
 
 void guardarprecios(map<string, int> precioasientos){
@@ -921,7 +987,7 @@ int eleccionsalayhora(map<int, vector<sala>> cine, int IDpeliculaescogida){
      */
 
     int opcsala;
-    cout << "\n Horarios y salas disponibles: " << endl;
+    cout << "\nHorarios y salas disponibles: " << endl;
     vector<int> opciones; // Se crea el vector que guardará las opciones de salas
 
     vector<sala>::iterator it; // Se crea el iterador para buscar las salas con asientos disponibles
@@ -956,7 +1022,7 @@ int eleccionsalayhora(map<int, vector<sala>> cine, int IDpeliculaescogida){
             break;
         }
         else {
-            cout << "\nAsegurese de ingresar un ID valido o -1 para salir: ";
+            cout << "\nAsegurese de ingresar un numero de sala valido o -1 para salir: ";
             cin.clear();
             cin.ignore();
             cin >> opcsala;
@@ -1074,7 +1140,7 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
     (*it).imprimirAsientos();  // Se imprimen los asientos de la sala
 
     char letra;
-    cout << "Por favor escoja la fila del asiento que desea (solo letras mayusculas): ";
+    cout << "\nPor favor escoja la fila del asiento que desea (solo letras mayusculas): ";
     cin >> letra;
 
     // Se valida que la letra ingresada si pertenezca a una fila de la sala
@@ -1083,14 +1149,14 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
             break;
         }
         else{
-            cout << "Asegurese de ingresar una fila valida: ";
+            cout << "\nAsegurese de ingresar una fila valida: ";
             cin.clear();
             cin.ignore();
             cin >> letra;
         }
     }
     int numeroasiento;
-    cout << "Ahora ingrese un numero de asiento que se encuentre disponible o -1 para salir: ";
+    cout << "\nAhora ingrese un numero de asiento que se encuentre disponible o -1 para salir: ";
     cin >> numeroasiento;
 
     if (numeroasiento==-1){
@@ -1105,7 +1171,7 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
             break;
         }
         else{
-            cout << "Asegurese de ingresar una numero de asiento valido (que este disponible): ";
+            cout << "\nAsegurese de ingresar una numero de asiento valido (que este disponible): ";
             cin.clear();
             cin.ignore();
             cin >> numeroasiento;
@@ -1121,7 +1187,7 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
         nuevosasientos[posicionfila][numeroasiento-1]='x';  // Reservación del asiento
         (*it).asignarAsientos(nuevosasientos);              // Asignación de los asientos a la sala
         (*it).actualizarCantasientos();                     // Actualización de la cantidad de asientos disponibles
-        cout << "\nBoleta comprada con exito" << endl;
+        cout << "\n***** Boleta comprada con exito *****" << endl;
     }
     else {
         return;
