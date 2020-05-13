@@ -1,3 +1,6 @@
-General-8500
-Preferencial-9000
-Vibrosound-10000
+2D General-7000
+2D Preferencial-9000
+2D Vibrosound-11000
+3D General-9000
+3D Preferencial-10000
+3D Vibrosound-12000

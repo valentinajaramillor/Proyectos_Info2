@@ -796,23 +796,27 @@ void registroprecios(map<string, int> &precioasientos){
     int opcprecio;
     int precio;
     cout << "\nEscoja el tipo de asiento al cual le quiere asignar o modificar el precio" << endl;
-    cout << "1. Asiento General." << endl;
-    cout << "2. Asiento Preferencial." << endl;
-    cout << "3. Asiento Vibrosound." << endl;
-    cout << "4. Salir.\n" << endl;
+    cout << "1. Asiento 2D General." << endl;
+    cout << "2. Asiento 3D General." << endl;
+    cout << "3. Asiento 2D Preferencial." << endl;
+    cout << "4. Asiento 3D Preferencial." << endl;
+    cout << "5. Asiento 2D Vibrosound." << endl;
+    cout << "6. Asiento 3D Vibrosound." << endl;
+    cout << "7. Salir.\n" << endl;
     cout << "Por favor, escriba SOLO el numero de la opcion que desea: ";
     cin >> opcprecio;
-    if (opcprecio==4){
+
+    if (opcprecio==7){
         return;
     }
     // Se valida que la opcion pertenezca al rango de opciones
-    while((!cin) || opcprecio<1 || opcprecio>4)
+    while((!cin) || opcprecio<1 || opcprecio>7)
     {
         cout << "\nAsegurese de ingresar una opcion valida (un numero entero positivo 1, 2, 3 o 4): ";
         cin.clear();
         cin.ignore();
         cin >> opcprecio;
-        if (opcprecio==4){
+        if (opcprecio==7){
             return;
         }
     }
@@ -842,14 +846,24 @@ void registroprecios(map<string, int> &precioasientos){
 
     // A continuacion se procede a guardar el nuevo precio en el mapa de precio de los asientos
     if (opcprecio==1){
-        precioasientos["General"]=precio;
+        precioasientos["2D General"]=precio;
     }
     else if (opcprecio==2){
-        precioasientos["Preferencial"]=precio;
+        precioasientos["3D General"]=precio;
+    }
+    else if (opcprecio==3){
+        precioasientos["2D Preferencial"]=precio;
+    }
+    else if (opcprecio==4){
+        precioasientos["3D Preferencial"]=precio;
+    }
+    else if (opcprecio==5){
+        precioasientos["2D Vibrosound"]=precio;
     }
     else {
-        precioasientos["Vibrosound"]=precio;
+        precioasientos["3D Vibrosound"]=precio;
     }
+
     cout << "\n***** Precio guardado con exito *****" << endl;
 }
 
@@ -1207,17 +1221,17 @@ bool pagodeboleta(int fila, sala sala, map<string, int> precioasientos,
     // Si está en el segundo tercio de la sala, será asiento "Preferencial"
     // Si está en el tercer tercio de la sala, será asiento "General"
     if (fila<(sala.obtenerCantidadasientos())/30){
-        precio=precioasientos["Vibrosound"];
-        zona="Vibrosound";
+        precio=precioasientos[sala.obtenerTiposala()+" Vibrosound"];
+        zona=sala.obtenerTiposala()+" Vibrosound";
 
     }
     else if (fila>=(sala.obtenerCantidadasientos())/30 && fila<(sala.obtenerCantidadasientos())/15){
-        precio=precioasientos["Preferencial"];
-        zona="Preferencial";
+        precio=precioasientos[sala.obtenerTiposala()+" Preferencial"];
+        zona=sala.obtenerTiposala()+" Preferencial";
     }
     else{
-          precio=precioasientos["General"];
-          zona="General";
+          precio=precioasientos[sala.obtenerTiposala()+" General"];
+          zona=sala.obtenerTiposala()+" General";
     }
 
     cout << "\nEl precio de la boleta en el asiento escogido (Zona" << zona << ") es: " << precio << endl;
@@ -1270,13 +1284,13 @@ void imprimirPrecios(map<string, int> precioasientos, sala sala){
     /* Esta funcion recibe el mapa con los precios de los asientos, y recibe la sala de la cual se obtendrán los precios
      * La función imprime los precios dependiendo de la partición de las filas, ya que esta determina la zona en la sala
      */
-    cout << "\nPRECIOS: " << endl;
+    cout << "\nPRECIOS DE SALA " << sala.obtenerTiposala() << ": " << endl;
     cout << "Zona General (Filas de la " << char(65) << " a la " << char(64+sala.obtenerCantidadasientos()/30) << "): ";
-    cout << precioasientos["General"] << endl;
+    cout << precioasientos[sala.obtenerTiposala()+" General"] << endl;
     cout << "Zona Preferencial (Filas de la " << char(65+sala.obtenerCantidadasientos()/30) << " a la " << char(64+2*sala.obtenerCantidadasientos()/30) << "): ";
-    cout << precioasientos["Preferencial"] << endl;
+    cout << precioasientos[sala.obtenerTiposala()+" Preferencial"] << endl;
     cout << "Zona Vibrosound (Filas de la " << char(65+2*sala.obtenerCantidadasientos()/30) << " a la " << char(64+3*sala.obtenerCantidadasientos()/30) << "): ";
-    cout << precioasientos["Vibrosound"] << endl;
+    cout << precioasientos[sala.obtenerTiposala()+" Vibrosound"] << endl;
 }
 
 void registrarventa(string cedulauser, int IDpeli, sala salaescogida, int precio, string zona){
