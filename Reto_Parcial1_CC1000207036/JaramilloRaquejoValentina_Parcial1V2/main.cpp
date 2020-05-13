@@ -524,7 +524,7 @@ void registropeliculas(map<int, vector<sala>> &cine){
     }
 
     while(!cin || opctipo<0 || opctipo>3){
-        cout << "\nAsegurese de ingresar una opcion valida o escriba 0 para salir: ";
+        cout << "\nAsegurese de ingresar una opcion valida o escriba -1 para salir: ";
         cin.clear();
         cin.ignore();
         cin >> opctipo;
