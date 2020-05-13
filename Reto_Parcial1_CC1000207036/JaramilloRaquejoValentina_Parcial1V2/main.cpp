@@ -1,6 +1,9 @@
 /* Abrir para leer la primera parte de la documentacion y consideraciones importantes sobre el programa
  *
  * Carpeta build del programa: "build-JaramilloRaquejoValentina_Parcial1V2-Desktop_Qt_5_12_2_MinGW_32_bit-Debug"
+ * Carpeta donde se guardan los archivos con la información: "archivos con info"
+ * En la ruta:
+ * "Proyectos_Info2\Reto_Parcial1_CC1000207036\JaramilloRaquejoValentina_Parcial1V2\archivos con info"
  *
  * RESUMEN DE LA ESTRUCTURA Y CONSIDERACIONES
  * Este programa cumple las funciones de un simulador de salas de cine, donde podemos encontrar dos perfiles, uno de
@@ -17,11 +20,11 @@
  * cine, el programa principal, guarda la informacion de las peliculas y las salas de cine por medio de un mapa, que como clave
  * tiene el ID de la pelicula, y como valor tiene un vector de salas donde se proyectará.
  *
- * La información de las peliculas de encuentra en un archivo dentro de la carpeta build del programa, con el nombre
- * "info_peliculas". La informacion de los precios de los asientos y sus nombres se encuentra en un archivo en la carpeta build
- * del programa, y este archivo se llama "precio_asientos". Y finalmente, cada sala guardará su información de asientos ocupados
- * y disponibles por medio de un archivo en la carpeta build, que se llamará "sala_..." y en vez de los tres puntos, tendrá el
- * numero de la sala.
+ * La información de las peliculas de encuentra en un archivo dentro de la carpeta "archivos con info", con el nombre
+ * "info_peliculas". La informacion de los precios de los asientos y sus nombres se encuentra en un archivo en la carpeta
+ * "archivos con info", y este archivo se llama "precio_asientos". Y finalmente, cada sala guardará su información de asientos
+ * ocupados y disponibles por medio de un archivo en la carpeta "archivos con info", que se llamará "sala_..." y en vez de los
+ * tres puntos, tendrá el numero de la sala.
  *
  * En estos archivos donde se guarda la información de los asientos, podrá observar que los asientos disponibles son representados
  * por 'o' y los asientos ocupados estan representados por una 'x'. Todas las salas están distribuidas de acuerdo a tres zonas.
@@ -31,8 +34,8 @@
  * los puede asignar el administrador.
  *
  * INFORMACIÓN IMPORTANTE: CLAVE ADMINISTRADOR- La clave del administrador es "clavesudo123" sin las comillas. Esta clave se
- * encuentra guardada en formato codificado en el archivo de la carpeta build  con nombre del archivo: "clave_admin". El formato
- * de codificacion usado fue el primer metodo de codificacion de la practica 3, con semilla de codificación 4.
+ * encuentra guardada en formato codificado en el archivo de la carpeta "archivos con info" con nombre del archivo: "clave_admin".
+ * El formato de codificacion usado fue el primer metodo de codificacion de la practica 3, con semilla de codificación 4.
  */
 
 #include "pelicula.h"
@@ -65,12 +68,16 @@ void sacarprecios(map<string, int>&);
 vector<int> opcionespeli(map<int, vector<sala>>);
 int eleccionpelicula(map<int, vector<sala>>, vector<int> (map<int, vector<sala>>));
 int eleccionsalayhora(map<int, vector<sala>>, int);
-void eleccionasiento(map<int, vector<sala>>&);
 void guardarsalas(map<int, vector<sala>>);
 void sacarsalas(map<int, vector<sala>>&);
-void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosala, bool (int, sala, map<string, int>), map<string, int>);
-bool pagodeboleta(int, sala, map<string, int>);
+void eleccionasiento(map<int, vector<sala>>&, int, int,
+                      bool (int, sala, map<string, int>, void (string, int, class sala, int, string), string, int),
+                      map<string, int>, void (string, int, sala, int, string), string);
+bool pagodeboleta(int, sala, map<string, int>, void (string, int, class sala, int, string), string, int);
 void imprimirPrecios(map<string, int>, sala);
+void registrarventa(string cedulauser, int IDpeli, sala salaescogida, int precio, string zona);
+void imprimireporte();
+void borrarreporte();
 
 int main()
 {
@@ -78,10 +85,12 @@ int main()
     bool cinein=true;
     bool sudoin=true;
     bool userin;
+
     //Variables que guardarán las opciones escogidas por el usuario en los menus
     short int opci;
     short int opcs;
     short int opcu;
+
     //Strings auxiliares para la codificación y decodificación de la clave de administrador
     // Y de la clave ingresada por el usuario que quiere ingresar como administrador
     string original="";
@@ -122,19 +131,37 @@ int main()
 
                     // Se registran las peliculas en la variable del cine
                     registropeliculas(cine);
+
                     // Se guarda la información en los archivos
                     guardarpeliculas(cine);
                     guardarsalas(cine);
-                    continue;
+
                 }
                 else if (opcs==2){
+
                     cout << "\n...MODIFICACION DE PRECIOS..." << endl;
 
                     // Se registran los nuevos precios de los asientos
                     registroprecios(precioasientos);
+
                     // Se guarda la información en el archivo de precios
                     guardarprecios(precioasientos);
-                    continue;
+
+
+                }
+                else if (opcs==3){
+                    cout << "\n...VISUALIZACION DEL REPORTE DE VENTAS..." << endl;
+
+                    // Se imprime el reporte de las ventas
+                    imprimireporte();
+
+                }
+                else if (opcs==4){
+                    cout << "\n...ELIMINACION DEL HISTORIAL CON LOS REPORTES DE VENTAS..." << endl;
+
+                    // Se borra el historial de los reportes de ventas
+                    borrarreporte();
+
                 }
                 else {
                     cout << "\n...HASTA LUEGO, ADMINISTRADOR..." << endl;
@@ -168,7 +195,7 @@ int main()
 
                     // Se le muestra al usuario los asientos y se le pone a escoger, validando que el asiento esté disponible
                     // Se procede a usar la función "pagodeboleta" para que se ingrese el dinero y se den las devueltas
-                    eleccionasiento(cine, IDpeliescogida, salaescogida, pagodeboleta, precioasientos);
+                    eleccionasiento(cine, IDpeliescogida, salaescogida, pagodeboleta, precioasientos, registrarventa, cedulauser);
 
                     // Se guarda la información actualizada de los asientos en la informacion de las peliculas y las salas
                     guardarpeliculas(cine);
@@ -181,7 +208,7 @@ int main()
             }
         }
         else {
-            cout << "\n...VUELVA PRONTO..." << endl;
+            cout << "\n...VUELVA PRONTO...\n" << endl;
             cinein=false;
         }
     }
@@ -220,13 +247,14 @@ short int opcsudo(){
     cout << "\nBienvenido administrador, que desea hacer?\n" << endl;
     cout << "1. Registrar peliculas." << endl;
     cout << "2. Modificar precios de boleteria (precio por asiento)." << endl;
-    cout << "3. Generar reporte de venta de boleteria del dia." << endl;
-    cout << "4. Salir.\n" << endl;
+    cout << "3. Mostrar reporte de ventas." << endl;
+    cout << "4. Borrar reporte de ventas." << endl;
+    cout << "5. Salir.\n" << endl;
     cout << "Por favor, escriba SOLO el numero de la opcion que desea: ";
     cin >> opcsudo;
-    while((!cin) || opcsudo<1 || opcsudo>4)
+    while((!cin) || opcsudo<1 || opcsudo>5)
     {
-        cout << "\nAsegurese de ingresar una opcion valida (un numero entero positivo 1, 2, 3 o 4): ";
+        cout << "\nAsegurese de ingresar una opcion valida (un numero entero positivo 1, 2, 3, 4 o 5): ";
         cin.clear();
         cin.ignore();
         cin >> opcsudo;
@@ -365,10 +393,10 @@ bool validsudo(string &poscontra, void codclave(string&)){
     string validcontra="";
 
     ifstream infile;
-    infile.open("clave_admin.txt");
+    infile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/clave_admin.txt");
     if (!infile.is_open())
        {
-         std::cout << "Error opening file" << endl;
+         std::cout << "Error abriendo el archivo con la clave del administrador" << endl;
          exit(1);
        }
     getline(infile, validcontra);
@@ -399,25 +427,27 @@ bool ingresouser(string &cedulauser){
      * numero positivo. Si el usuario ingresa -1, la funcion retorna false, en caso contrario, y si el usuario ingresó
      * su cedula correctamente, la función devuelve true, lo que permite ingresar el ciclo de funcionamiento del perfil usuario.
      */
-    string cedula="";
+    int cedula;
     cout << "\nIngrese su cedula o escriba -1 para salir: ";
     cin >> cedula;
 
-    if (stoi(cedula)==-1){
+    if (cedula==-1){
         return false;
     }
 
-    while(!cin || stoi(cedula)<0)
+    while(!cin || cedula<=0)
     {
-        cout << "\nAsegurese de ingresar una cedula valida o escriba 1 para salir: ";
+        cout << "\nAsegurese de ingresar una cedula valida o escriba -1 para salir: ";
         cin.clear();
         cin.ignore();
         cin >> cedula;
-        if (stoi(cedula)==1){
+        if (cedula==-1){
             return false;
         }
+
     }
-    cedulauser=cedula;
+
+    cedulauser=to_string(cedula);
     return true;
 }
 
@@ -618,13 +648,13 @@ void guardarpeliculas(map<int, vector<sala>> cine){
      * del programa
      */
     ofstream outfile;
-    outfile.open("info_peliculas.txt");
+    outfile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/info_peliculas.txt");
     string auxtxt="";
 
     // Se abre el archivo
     if (!outfile.is_open())
        {
-         std::cout << "Error abriendo el archivo" << endl;
+         std::cout << "Error abriendo el archivo con la informacion de las peliculas" << endl;
          exit(1);
        }
     // Se ingresa a la información del cine y se le acomoda en un string, de acuerdo al formato
@@ -659,11 +689,11 @@ void sacarinfocine(map<int, vector<sala>> &cine){
      * y de esta forma mantener la información actualizada
      */
     ifstream infile;
-    infile.open("info_peliculas.txt");
+    infile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/info_peliculas.txt");
     // Se abre el archivo
     if (!infile.is_open())
        {
-         std::cout << "Error abriendo el archivo" << endl;
+         std::cout << "Error abriendo el archivo con la informacion de las peliculas" << endl;
          exit(1);
        }
     string linea;
@@ -763,12 +793,12 @@ void guardarprecios(map<string, int> precioasientos){
      * "nombredelasiento-precio"
      */
     ofstream outfile;
-    // Se abe el archivo
-    outfile.open("precio_asientos.txt");
+    // Se abre el archivo
+    outfile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/precio_asientos.txt");
     string auxtxt="";
     if (!outfile.is_open())
        {
-         std::cout << "Error abriendo el archivo" << endl;
+         std::cout << "Error abriendo el archivo con la informacion de los precios" << endl;
          exit(1);
        }
     // Por cada pareja de elementos del mapa, se realiza la escritura en el string auxtxt, con la información
@@ -786,10 +816,10 @@ void sacarprecios(map<string, int> &precioasientos){
      */
     ifstream infile;
     // Se abre el archivo
-    infile.open("precio_asientos.txt");
+    infile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/precio_asientos.txt");
     if (!infile.is_open())
        {
-         std::cout << "Error abriendo el archivo" << endl;
+         std::cout << "Error abriendo el archivo con la informacion de los precios" << endl;
          exit(1);
        }
     string linea;
@@ -958,12 +988,12 @@ void guardarsalas(map<int, vector<sala>> cine){
             vector<vector<char>> asientos=(*it).obtenerAsientos();
 
             // Se abre o se crea el archivo de la sala
-            outfile.open("sala_"+to_string((*it).obtenerNumerosala())+".txt");
+            outfile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/sala_"+to_string((*it).obtenerNumerosala())+".txt");
             string auxtxt="";
 
             if (!outfile.is_open())
                {
-                 std::cout << "Error abriendo el archivo" << endl;
+                 std::cout << "Error abriendo el archivo con la informacion de los asientos de la sala" << endl;
                  exit(1);
                }
             // Se guarda el string de la fila de asientos en auxtxt
@@ -992,10 +1022,10 @@ void sacarsalas(map<int, vector<sala>> &cine){
         for (;it!=pareja.second.end(); it++){
             vector<vector<char>> asientos;  // Se crea el vector de vectores donde irán los asientos de la sala
             // Se abre el archivo de la sala
-            infile.open("sala_"+to_string((*it).obtenerNumerosala())+".txt");
+            infile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/sala_"+to_string((*it).obtenerNumerosala())+".txt");
             if (!infile.is_open())
                {
-                 std::cout << "Error abriendo el archivo" << endl;
+                 std::cout << "Error abriendo el archivo con la informacion de los asientos de la sala" << endl;
                  exit(1);
                }
             string linea;
@@ -1018,7 +1048,10 @@ void sacarsalas(map<int, vector<sala>> &cine){
     }
 }
 
-void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosala, bool pagodeboleta(int, sala, map<string, int>), map<string, int> precioasientos){
+void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosala,
+                     bool pagodeboleta(int, sala, map<string, int>, void (string, int, class sala, int, string), string, int),
+                     map<string, int> precioasientos, void registrarventa(string, int, sala, int, string), string cedulauser){
+
     /* Esta funcion recibe el mapa "cine", el ID de la pelicula escogida, el numero de la sala escogida, el mapa
      * de precio de los asientos, y la función de pago de boleta. Dentro de la función se usa el método "imprimirAsientos" de
      * la sala, este método imprime los asientos de la sala para que el usuario pueda escoger el asiento que desea
@@ -1051,6 +1084,8 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
         }
         else{
             cout << "Asegurese de ingresar una fila valida: ";
+            cin.clear();
+            cin.ignore();
             cin >> letra;
         }
     }
@@ -1071,14 +1106,17 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
         }
         else{
             cout << "Asegurese de ingresar una numero de asiento valido (que este disponible): ";
+            cin.clear();
+            cin.ignore();
             cin >> numeroasiento;
             if (numeroasiento==-1){
                 return;
             }
         }
     }
+
     // Si se realizó el pago correctamente, si procede a actualizar la información
-    if (pagodeboleta(posicionfila, *it, precioasientos)==true){
+    if (pagodeboleta(posicionfila, *it, precioasientos, registrarventa, cedulauser, IDpelicula)==true){
         vector<vector<char>> nuevosasientos=(*it).obtenerAsientos(); // Creación de nuevo vector de vectores con asientos
         nuevosasientos[posicionfila][numeroasiento-1]='x';  // Reservación del asiento
         (*it).asignarAsientos(nuevosasientos);              // Asignación de los asientos a la sala
@@ -1090,7 +1128,8 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
     }
 }
 
-bool pagodeboleta(int fila, sala sala, map<string, int> precioasientos){
+bool pagodeboleta(int fila, sala sala, map<string, int> precioasientos,
+                  void registrarventa(string, int, class sala, int, string), string cedulauser, int IDpeli){
     /* Esta funcion recibe el numero de la fila, convertido a su codigo para ser accedido desde el vector de vectores
      * correspondiente a los asientos de la sala, y dependiendo de su ubicacion, se le asigna un precio a la boleta
      * y se usa el algoritmo 1 de la practica 2 para hacer el procedimiento de devueltas
@@ -1132,6 +1171,8 @@ bool pagodeboleta(int fila, sala sala, map<string, int> precioasientos){
         }
         else{
             cout << "\nAsegurese de ingresar suficiente dinero para pagar: ";
+            cin.clear();
+            cin.ignore();
             cin >> dinero;
             if (dinero==-1){ // Se devuelve false si el usuario ingresa -1
                 return false;
@@ -1155,7 +1196,7 @@ bool pagodeboleta(int fila, sala sala, map<string, int> precioasientos){
         }
         cout << "Faltante: " << sobrante << endl;
     }
-
+    registrarventa(cedulauser, IDpeli, sala, precio, zona);
     return true; // Se devuelve true si la compra se realizó con éxito
 }
 
@@ -1172,6 +1213,101 @@ void imprimirPrecios(map<string, int> precioasientos, sala sala){
     cout << precioasientos["Vibrosound"] << endl;
 }
 
+void registrarventa(string cedulauser, int IDpeli, sala salaescogida, int precio, string zona){
+    /* La función recibe la cedula del usuario, el ID de la pelicula, la sala escogida, el precio de la boleta y la
+     * zona en la que se encuentra el asiento, y esta información la guarda en el archivo "reporte_ventas" en modo append,
+     * con el formato:
+     * "cedula-IDpelicula-Numerodesala-Zonadelasiento-Precio"
+     */
+    ofstream outfile;
+    // Se abre el archivo
+    outfile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/reporte_ventas.txt", std::ios::out | std::ios::app);
+    string auxtxt="";
+    if (!outfile.is_open())
+       {
+         std::cout << "Error abriendo el archivo con el reporte de las ventas" << endl;
+         exit(1);
+       }
 
+    auxtxt= cedulauser+"-"+to_string(IDpeli)+"-"+to_string(salaescogida.obtenerNumerosala())+"-"+zona+"-"+to_string(precio)+"\n";
+    outfile << auxtxt;  // Se escribe la información en el archivo y se cierra
+    outfile.close();
+}
 
+void imprimireporte(){
+    /* Esta funcion abre el archivo "reporte_ventas", lee la información guardada en el, e imprime el reporte de las ventas,
+     * organizando la información para que pueda ser leida por el administrador
+     */
+    ifstream infile;
+    // Se abre el archivo
+    infile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/reporte_ventas.txt");
+    if (!infile.is_open())
+       {
+         std::cout << "Error abriendo el archivo con el reporte de las ventas" << endl;
+         exit(1);
+       }
+    cout << "\nEstas son las ventas realizadas hasta el momento: " << endl;
+    string linea;
+    int numventas=0;
+    int valortotal=0;
+    // Se lee linea por linea
+    while (getline(infile, linea)){
+        string aux1="";
+        int cont=0;
+        numventas++;
+        // A continuacion se identifica y separa la informacion de la linea
+        // para imprimirsela al administrador y que la pueda entender
+        for (unsigned int i=0; i<linea.size()+1; i++){
+            if (linea[i]=='-' || i==linea.size()){
+                cont++;
+                if (cont==1){
+                    cout << "\nCedula del cliente: " << aux1 << endl;
+                }
+                else if (cont==2){
+                    cout << "ID de la pelicula escogida: " << aux1 << endl;
+                }
+                else if (cont==3){
+                    cout << "Numero de la sala: " << aux1 << endl;
+                }
+                else if (cont==4){
+                    cout << "Zona del asiento: " << aux1 << endl;
+                }
+                else {
+                    cout << "Valor pagado: " << aux1 << endl;
+                    valortotal=valortotal+stoi(aux1);
+                }
+                aux1="";
 
+            }
+            else {
+                aux1=aux1+linea[i];
+            }
+        }
+
+    }
+
+    cout << "\nDinero total de las ventas: " << valortotal << endl;
+    cout << "Numero de ventas: " << numventas << endl;
+
+    infile.close(); // Se cierra el archivo
+}
+
+void borrarreporte(){
+    /* La función recibe borra todos los datos guardados dentro del archivo de reporte de ventas "reporte_ventas".
+     * Esto con el objetivo de que el administrador seleccione el momento en el que quiere borrar los reportes antiguos
+     */
+    ofstream outfile;
+    // Se abre el archivo
+    outfile.open("../JaramilloRaquejoValentina_Parcial1V2/archivos con info/reporte_ventas.txt");
+    string auxtxt="";
+    if (!outfile.is_open())
+       {
+         std::cout << "Error abriendo el archivo con el reporte de las ventas" << endl;
+         exit(1);
+       }
+
+    outfile << "";  // Se escribe un string vacío en el documento y luego se cierra
+    outfile.close();
+    cout << "\n***** Los reportes de ventas han sido borrados con exito *****" << endl;
+    cout << "\n***** Cuando se generen nuevas ventas, se guardaran automaticamente *****" << endl;
+}
