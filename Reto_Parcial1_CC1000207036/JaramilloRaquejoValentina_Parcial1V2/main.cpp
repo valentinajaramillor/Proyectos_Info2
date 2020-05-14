@@ -501,10 +501,39 @@ void registropeliculas(map<int, vector<sala>> &cine){
     std::getline(std::cin >> std::ws, nombre);
     cout << "\nIngrese el genero de la pelicula: ";
     cin >> genero;
-    cout << "\nIngrese la duracion en minutos de la pelicula: ";
+    cout << "\nIngrese la duracion en minutos de la pelicula o -1 para salir: ";
     cin >> duracionmin;
-    cout << "\nIngrese la clasificacion de la pelicula (sin el +): ";
+
+    if (duracionmin==-1){  // Se sale de la función y esto provoca que termine el proceso de registro de peliculas
+        return;
+    }
+
+    while(!cin || duracionmin<0){
+        cout << "\nAsegurese de ingresar una duracion valida o escriba -1 para salir: ";
+        cin.clear();
+        cin.ignore();
+        cin >> duracionmin;
+        if (duracionmin==-1){
+            return;
+        }
+    }
+
+    cout << "\nIngrese la clasificacion de la pelicula (sin el +) o escriba -1 para salir: ";
     cin >> clasificacion;
+
+    if (clasificacion==-1){  // Se sale de la función y esto provoca que termine el proceso de registro de peliculas
+        return;
+    }
+
+    while(!cin || clasificacion<0 || clasificacion>20){
+        cout << "\nAsegurese de ingresar una clasificacion valida o escriba -1 para salir: ";
+        cin.clear();
+        cin.ignore();
+        cin >> clasificacion;
+        if (clasificacion==-1){
+            return;
+        }
+    }
 
     // Se crea el objeto pelicula y se le asigna su información como atributos
     pelicula nuevapelicula;
@@ -1177,15 +1206,25 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
 
     // Se valida que la letra ingresada si pertenezca a una fila de la sala y que esté disponible
     while (true){
-        posicionfila=((*it).obtenerCantidadasientos()/10)-(((int)letra)-64);
-        bool filadisp=false;
-        for (unsigned int i=0; i<(*it).obtenerAsientos()[posicionfila].size(); i++){
-            if ((*it).obtenerAsientos()[posicionfila][i]=='o'){
-                filadisp=true;
+
+        if (letra>=(char)65 && letra<=(char)(((*it).obtenerCantidadasientos()/10)+64)){
+            posicionfila=((*it).obtenerCantidadasientos()/10)-(((int)letra)-64);
+            bool filadisp=false;
+            for (unsigned int i=0; i<(*it).obtenerAsientos()[posicionfila].size(); i++){
+                if ((*it).obtenerAsientos()[posicionfila][i]=='o'){
+                    filadisp=true;
+                }
             }
-        }
-        if (letra>=(char)65 && letra<=(char)(((*it).obtenerCantidadasientos()/10)+64) && filadisp==true){
-            break;
+            if (filadisp==true){
+                break;
+            }
+            else{
+                cout << "\nAsegurese de ingresar una fila valida y que tenga asientos disponibles: ";
+                cin.clear();
+                cin.ignore();
+                cin >> letra;
+            }
+
         }
         else{
             cout << "\nAsegurese de ingresar una fila valida y que tenga asientos disponibles: ";
