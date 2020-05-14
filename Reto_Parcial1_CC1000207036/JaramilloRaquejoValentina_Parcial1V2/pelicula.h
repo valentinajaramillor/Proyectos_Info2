@@ -1,4 +1,8 @@
-/*
+/* Esta clase representa las peliculas de mi simulación. Como atributos tiene su ID, su nombre, su genero, su duracion en minutos,
+ * y su clasificacion.
+ *
+ * La documentación o los comentarios de cada método se encuentran dentro del archivo .cpp de la clase, dentro de cada una
+ * de sus implementaciones o definiciones.
  */
 
 #ifndef PELICULA_H

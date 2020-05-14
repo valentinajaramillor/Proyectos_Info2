@@ -1296,7 +1296,7 @@ bool pagodeboleta(int fila, sala sala, map<string, int> precioasientos,
           zona=sala.obtenerTiposala()+" General";
     }
 
-    cout << "\nEl precio de la boleta en el asiento escogido (Zona" << zona << ") es: " << precio << endl;
+    cout << "\nEl precio de la boleta en el asiento escogido (Zona " << zona << ") es: " << precio << endl;
 
     // Se le pide al usuario que ingrese el dinero
     int dinero;
