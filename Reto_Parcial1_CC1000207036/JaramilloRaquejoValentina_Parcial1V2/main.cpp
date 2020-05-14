@@ -127,7 +127,7 @@ int main()
                 opcs=opcsudo();
 
                 if (opcs==1){
-                    cout << "\n...REGISTRO DE PELICULAS..." << endl;
+                    cout << "\n\n...REGISTRO DE PELICULAS..." << endl;
 
                     // Se registran las peliculas en la variable del cine
                     registropeliculas(cine);
@@ -139,7 +139,7 @@ int main()
                 }
                 else if (opcs==2){
 
-                    cout << "\n...MODIFICACION DE PRECIOS..." << endl;
+                    cout << "\n\n...MODIFICACION DE PRECIOS..." << endl;
 
                     // Se registran los nuevos precios de los asientos
                     registroprecios(precioasientos);
@@ -150,21 +150,21 @@ int main()
 
                 }
                 else if (opcs==3){
-                    cout << "\n...VISUALIZACION DEL REPORTE DE VENTAS..." << endl;
+                    cout << "\n\n...VISUALIZACION DEL REPORTE DE VENTAS..." << endl;
 
                     // Se imprime el reporte de las ventas
                     imprimireporte();
 
                 }
                 else if (opcs==4){
-                    cout << "\n...ELIMINACION DEL HISTORIAL CON LOS REPORTES DE VENTAS..." << endl;
+                    cout << "\n\n...ELIMINACION DEL HISTORIAL CON LOS REPORTES DE VENTAS..." << endl;
 
                     // Se borra el historial de los reportes de ventas
                     borrarreporte();
 
                 }
                 else {
-                    cout << "\n...HASTA LUEGO, ADMINISTRADOR..." << endl;
+                    cout << "\n\n...HASTA LUEGO, ADMINISTRADOR..." << endl;
                     sudoin=false;
                 }
             }
@@ -178,7 +178,7 @@ int main()
                 opcu=opcuser(cedulauser);  // Se entregan las opciones de funciones y se recoge la decisión
 
                 if (opcu==1){
-                    cout << "\n...ELECCION DE PELICULA..." << endl;
+                    cout << "\n\n...ELECCION DE PELICULA..." << endl;
 
                     // El usuario escoge la pelicula que desea
                     int IDpeliescogida=eleccionpelicula(cine, opcionespeli);
@@ -202,13 +202,13 @@ int main()
                     guardarsalas(cine);
                 }
                 else if (opcu==2){
-                    cout << "\n...HASTA LUEGO, USUARIO..." << endl;
+                    cout << "\n\n...HASTA LUEGO, USUARIO..." << endl;
                     userin=false;
                 }
             }
         }
         else {
-            cout << "\n...VUELVA PRONTO...\n" << endl;
+            cout << "\n\n...VUELVA PRONTO...\n" << endl;
             cinein=false;
         }
     }
@@ -222,7 +222,7 @@ short int opcini(){
      * validando que la opción si sea valida
      */
     short int opcini;
-    cout << "\nSIMULACION DE SALAS DE CINE\n" << endl;
+    cout << "\n\nSIMULACION DE SALAS DE CINE\n" << endl;
     cout << "\nBienvenido, que desea hacer?\n" << endl;
     cout << "1. Ingresar como administrador." << endl;
     cout << "2. Ingresar como usuario." << endl;
@@ -244,7 +244,7 @@ short int opcsudo(){
      * validando que la opción si sea valida
      */
     short int opcsudo;
-    cout << "\nBienvenido administrador, que desea hacer?\n" << endl;
+    cout << "\n\nBienvenido administrador, que desea hacer?\n" << endl;
     cout << "1. Registrar peliculas." << endl;
     cout << "2. Modificar precios de boleteria (precio por asiento)." << endl;
     cout << "3. Mostrar reporte de ventas." << endl;
@@ -268,7 +268,7 @@ short int opcuser(string &cedulauser){
      * su numero de cedula guardado en "cedulauser"
      */
     short int opcuser;
-    cout << "\nBienvenido usuario " << cedulauser << ", que desea hacer?\n" << endl;
+    cout << "\n\nBienvenido usuario " << cedulauser << ", que desea hacer?\n" << endl;
     cout << "1. Comprar boleta." << endl;
     cout << "2. Salir.\n" << endl;
     cout << "Por favor, escriba SOLO el numero de la opcion que desea: ";
@@ -627,9 +627,8 @@ void registropeliculas(map<int, vector<sala>> &cine){
             sala nuevasala(numerosala, nuevapelicula, "2D", 60, hora);
             cine[ID].push_back(nuevasala);
         }
-
+        cout << "\n***** Pelicula y sala registradas con exito *****" << endl;
     }
-    cout << "\n***** Pelicula y sala registradas con exito *****" << endl;
 
     if (opctipo==2 || opctipo==3){
         cout << "\nIngrese el numero de la sala 3D en la cual se va a proyectar la pelicula (numero entero positivo) o -1 para salir: ";
@@ -682,8 +681,9 @@ void registropeliculas(map<int, vector<sala>> &cine){
             sala nuevasala(numerosala, nuevapelicula, "3D", 60, hora);
             cine[ID].push_back(nuevasala);
         }
+        cout << "\n***** Pelicula y sala registradas con exito *****" << endl;
     }
-    cout << "\n***** Pelicula y sala registradas con exito *****" << endl;
+
 }
 
 void guardarpeliculas(map<int, vector<sala>> cine){
@@ -795,7 +795,7 @@ void registroprecios(map<string, int> &precioasientos){
      */
     int opcprecio;
     int precio;
-    cout << "\nEscoja el tipo de asiento al cual le quiere asignar o modificar el precio" << endl;
+    cout << "\n\nEscoja el tipo de asiento al cual le quiere asignar o modificar el precio" << endl;
     cout << "1. Asiento 2D General." << endl;
     cout << "2. Asiento 3D General." << endl;
     cout << "3. Asiento 2D Preferencial." << endl;
@@ -934,30 +934,41 @@ vector<int> opcionespeli(map<int, vector<sala>> cine){
      * pueda escoger. La función devuelve este vector.
      */
     vector<int> IDs;
-    for (auto pareja : cine){
-        pelicula pelienproyeccion= pareja.second[0].obtenerPelienproyeccion();
-        cout << "\nID: " << pelienproyeccion.obtenerID() << " " << endl;
-        cout << "Nombre: " << pelienproyeccion.obtenerNombre() << " " << endl;
-        cout << "Genero: " << pelienproyeccion.obtenerGenero() << " " << endl;
-        cout << "Duracion: " << pelienproyeccion.obtenerDuracionmin() << " min " << endl;
-        cout << "Clasificacion: " << pelienproyeccion.obtenerClasificacion() << "+" << endl;
+    if (cine.size()==0){
+        cout << "\nActualmente no hay peliculas en cartelera" << endl;
+    }
+    else {
+        cout << "\nEstas son las peliculas en cartelera: " << endl;
+        for (auto pareja : cine){
+            pelicula pelienproyeccion= pareja.second[0].obtenerPelienproyeccion();
+            cout << "\nID: " << pelienproyeccion.obtenerID() << " " << endl;
+            cout << "Nombre: " << pelienproyeccion.obtenerNombre() << " " << endl;
+            cout << "Genero: " << pelienproyeccion.obtenerGenero() << " " << endl;
+            cout << "Duracion: " << pelienproyeccion.obtenerDuracionmin() << " min " << endl;
+            cout << "Clasificacion: " << pelienproyeccion.obtenerClasificacion() << "+" << endl;
 
-        IDs.push_back(pelienproyeccion.obtenerID());
+            IDs.push_back(pelienproyeccion.obtenerID());
+        }
     }
 
     return IDs;
 }
 
-int eleccionpelicula(map<int, vector<sala>> cine, vector<int> imprimirpeliculas(map<int, vector<sala>>)){
+int eleccionpelicula(map<int, vector<sala>> cine, vector<int> opcionespeli(map<int, vector<sala>>)){
     /* La función recibe el mapa "cine", y además recibe la función "imprimirpeliculas", que será usada para imprimir
      * las peliculas en cartelera y devolver el vector con las opciones. Al usuario se le pedirá que ingrese el ID de la
      * pelicula que desea, validando que sea un ID valido, y la función devolvera un entero con el ID de la película escogida
      * por el usuario o -1 si el usuario quiere salir de la elección
      */
     int opcpeli;
-    cout << "\nEstas son las peliculas en cartelera: " << endl;
+
     // Se usa la función imprimirpeliculas para imprimir las peliculas y guardar las opciones
-    vector<int> opciones=imprimirpeliculas(cine);
+    vector<int> opciones=opcionespeli(cine);
+
+    if (opciones.size()==0){  // Si el vector de opciones está vacio, se sale del proceso
+        return -1;
+    }
+
     cout << "\nPor favor, escriba SOLO el ID de la pelicula que desea o -1 para salir: ";
     cin >> opcpeli;
 
@@ -1015,6 +1026,11 @@ int eleccionsalayhora(map<int, vector<sala>> cine, int IDpeliculaescogida){
             cout << "Sala #" << (*it).obtenerNumerosala() << " --- Hora: " << (*it).obtenerHoraproyeccion() << ":00 hr" << endl;
             opciones.push_back((*it).obtenerNumerosala());
         }
+    }
+
+    if (opciones.size()==0){ // Si el vector de opciones está vacio, se sale del proceso
+        cout << "\nLo sentimos, no hay salas con asientos disponibles" << endl;
+        return -1;
     }
 
     cout << "\nPor favor ingrese SOLO el numero de la sala que desea o -1 para salir: ";
@@ -1157,13 +1173,22 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
     cout << "\nPor favor escoja la fila del asiento que desea (solo letras mayusculas): ";
     cin >> letra;
 
-    // Se valida que la letra ingresada si pertenezca a una fila de la sala
+    int posicionfila;
+
+    // Se valida que la letra ingresada si pertenezca a una fila de la sala y que esté disponible
     while (true){
-        if (letra>=(char)65 && letra<=(char)(((*it).obtenerCantidadasientos()/10)+64)){
+        posicionfila=((*it).obtenerCantidadasientos()/10)-(((int)letra)-64);
+        bool filadisp=false;
+        for (unsigned int i=0; i<(*it).obtenerAsientos()[posicionfila].size(); i++){
+            if ((*it).obtenerAsientos()[posicionfila][i]=='o'){
+                filadisp=true;
+            }
+        }
+        if (letra>=(char)65 && letra<=(char)(((*it).obtenerCantidadasientos()/10)+64) && filadisp==true){
             break;
         }
         else{
-            cout << "\nAsegurese de ingresar una fila valida: ";
+            cout << "\nAsegurese de ingresar una fila valida y que tenga asientos disponibles: ";
             cin.clear();
             cin.ignore();
             cin >> letra;
@@ -1176,16 +1201,14 @@ void eleccionasiento(map<int, vector<sala>> &cine, int IDpelicula, int numerosal
     if (numeroasiento==-1){
         return;
     }
-    int posicionfila;
 
     // Se valida que la posición del asiento si sea correcta (un asiento disponible)
     while (true){
-        posicionfila=((*it).obtenerCantidadasientos()/10)-(((int)letra)-64);
         if (numeroasiento>0 && numeroasiento<=10 && (*it).obtenerAsientos()[posicionfila][numeroasiento-1]=='o'){
             break;
         }
         else{
-            cout << "\nAsegurese de ingresar una numero de asiento valido (que este disponible): ";
+            cout << "\nAsegurese de ingresar una numero de asiento valido (que este disponible) o -1 para salir: ";
             cin.clear();
             cin.ignore();
             cin >> numeroasiento;
