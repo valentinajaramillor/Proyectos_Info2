@@ -1,0 +1,158 @@
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Template for a conference paper, prepared for the
+%% Food and Resource Economics Department - IFAS
+%% UNIVERSITY OF FLORIDA
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Version 1.0 // November 2019
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ariel Soto-Caro
+%%  - asotocaro@ufl.edu
+%%  - arielsotocaro@gmail.com
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage{UF_FRED_paper_style}
+
+
+%% ===============================================
+%% Setting the line spacing (3 options: only pick one)
+ \doublespacing
+% \singlespacing
+% \onehalfspacing
+%% ===============================================
+
+\setlength{\droptitle}{-5em} %% Don't touch
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SET THE TITLE
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TITLE:
+\title{Proyecto de investigación - Interrupciones
+}
+
+% AUTHORS:
+\author{Valentina Jaramillo Raquejo\\% Name author
+    \href{mailto:valentina.jaramillor@udea.edu.co}{\texttt{valentina.jaramillor@udea.edu.co}} %% Email author 1 
+%\and Second Author\\% Name author
+%    \href{mailto:secondauthor@ufl.edu}{\texttt{secondauthor@ufl.edu}}%% Email author 2
+    }
+    
+% DATE:
+\date{\today}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+{\setstretch{.8}
+\maketitle
+% %%%%%%%%%%%%%%%%%%
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BODY OF THE DOCUMENT
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+A modo de introducción es importante definir qué es una interrupción en el contexto de los microprocesadores. Una interrupción es un procedimiento que hace que el orden de ejecución de las instrucciones de un programa sea cambiado o siga otra ruta cuando se presenta un acontecimiento importante para el programa, o que podría ser necesario prestarle atención, esto sucede ya que el evento fue manifestado por el hardware de entrada o de salida, y es algo que puede suceder en cualquier momento, por lo que las interrupciones nos dan la posibilidad de tomar el control de estas situaciones sin necesidad de agregar instrucciones que verifiquen el estado del evento en cada ciclo.\citep{LambdaEcu}
+\newline
+
+Aunque la historia de las interrupciones es extensa, pues hubo muchos protagonistas en la creación de este tipo de implementación, a continuación se pretende dar unos puntos claves de manera cronológica, que ilustran su desarrollo:
+
+
+•	UNIVAC 1103 / 1103A (1953 / 1956)  es citado frecuentemente como el primero en implementar interrupciones.
+
+•	Por otro lado, algunos otros le atribuyen el título al 1103A (1956).
+
+•	Otras referencias indican que se desarrolló un sistema de interrupción por los empleados de la NACA Dick Turner y Joe Rawlings a finales de 1955 y que empezó a funcionar en febrero de 1956. Univac proporcionó una versión de este sistema de interrupción a los clientes como una característica del modelo "1103A".
+
+•	El trabajo en el sistema de interrupciones para el 1103 se llevó a cabo en el Laboratorio de Propulsión de Vuelo Lewis de la NACA en Cleveland, Ohio. (El laboratorio ahora tiene el nombre del Centro de Investigación John Glenn de la NASA en Lewis Field.) El 1103 se usaba normalmente para el procesamiento por lotes, pero fue modificado para que pudiera ser interrumpido para recoger datos en tiempo real del túnel de viento.
+
+•	Univac incorporó la idea de la interrupción en un modelo revisado de producción de memoria central (4.096 palabras) y comercializó el sistema como el 1103A. Las primeras computadoras 1103A fueron entregadas a finales de 1956.
+
+•	UNIVAC I (1951) – primera con manejo de excepciones.
+
+•	IBM 650 (1954) - primer uso de enmascaramiento de interrupción. El 650 tenía una opción de consola para pasar automáticamente a una secuencia de reinicio en caso de un error de la máquina.
+
+•	NBS DYSEAC (1954) - primeras interrupciones de E/S. DYSEAC era un ordenador móvil (transportado en dos remolques de 12 y 8 toneladas, respectivamente) construido para el Cuerpo de Señales del Ejército de los Estados Unidos. DYSEAC tenía dos contadores de programa, y una señal de E/S hacía que la ejecución cambiara de un PC a otro. Un bit en cada instrucción indica qué PC usar para la siguiente instrucción.
+
+•	IBM 704 (1955) – crea la característica de depuración llamada "atrapamiento de transferencia". Las ramas/saltos se llamaban "transferencias" en el 704.
+\newline
+
+Uno de los primeros fue Georg Cantor (1845-1918), matemático y lógico nacido en Rusia, y padre de la teoría de conjuntos \citep{CantorWiki} el cual participó en la creación de discusiones alrededor de nociones como las del infinito y las de verdad y demostración, cuestiones que al ser estudiadas por la comunidad académica del mundo, junto con conceptos relacionados con los conjuntos, supusieron el planteamiento de una serie de  paradojas que llevarían a la llamada “Crisis de los fundamentos” en la que se vieron enfrentadas posiciones fuertemente defendidas, una de las cuales sería el formalismo.
+\newline
+
+El formalismo expresa que: “Todas las afirmaciones matemáticas deberían ser escritas en un lenguaje preciso y formal, y manipuladas de acuerdo con reglas bien definidas.” \citep{AndresAbeliuk}. Esta escuela fue impulsada en gran medida por el matemático alemán, David Hilbert (1862-1943); uno de los fundadores de la teoría de la demostración, la lógica matemática y la distinción entre matemática y metamatemática \citep{HilbertWiki}. Hilbert propuso su “Programa de Hilbert”, como método para aclarar el estado de las matemáticas y demostrar su consistencia y completitud por medio de dos grandes postulados: 
+\newline
+
+“1. Todo conocimiento matemático se deriva de un conjunto finito de axiomas cuidadosamente seleccionados, y...
+
+2. Puede demostrarse que tal sistema axiomático es consistente, es decir, no conduce a contradicciones cuando se derivan conclusiones de ellos.” \citep{IncytdeMorales}.
+\newline
+
+A pesar de que Hilbert tenía una gran experiencia y reputación en el campo, su programa se vio trocado por los aportes de Kurt Gödel (1906-1978), lógico, matemático y filósofo austríaco \citep{GodelWiki}, el cual introduce el "Teorema de incompletitud", encaminado a demostrar que las matemáticas no podían ser, al mismo tiempo, consistentes y completas; consistentes queriendo decir que de una misma proposición nunca se podrá deducir la verdad y la falsedad, y completas; "que toda proposición que haya sido o pueda ser pensada sea susceptible, con las armas de deducción del sistema, de ser probada o refutada su verdad" \citep{ScieloCrespo}. 
+\newline
+
+En detalle, Gödel demuestra que “si se toma un sistema de axiomas lo suficientemente amplio - que contenga los axiomas de la aritmética como mínimo - siempre existirán proposiciones cuya certeza o falsedad será imposible demostrar, es decir serán proposiciones indecidibles. Aunque la proposición se cumpla en todos los casos observados, no nos garantiza que no falle en un próximo caso.” \citep{ScieloCrespo}, esto por medio de dos teoremas que desarrollan el porqué de que si una teoría aritmética es consistente no puede ser completa; esto debido a que siempre existirá una proposición que no podrá ser probada ni refutada usando los axiomas con los que cuenta la teoría, y la demostración de la consistencia de la teoría no cumpliría las condiciones para ser teorema dentro del sistema \citep{IncomGodelWiki}.
+\newline
+
+Por otra parte, estos teoremas estuvieron estrechamente relacionados y fueron parte de la respuesta al llamado “Problema de decisión”, el cual fue formalizado por el anteriormente mencionado David Hilbert, que buscaba crear un algoritmo lo suficientemente integral y válido que solucionará los dilemas matemáticos planteados, por medio de 3 preguntas fundamentales \citep{TuringWiki}: 
+\newline
+
+"1.	¿Son las matemáticas completas?
+
+ 2.	¿Son las matemáticas consistentes?
+
+ 3.	¿Son las matemáticas decidibles?" \citep{TuringWiki}.
+\newline
+
+Los teoremas de Gödel dieron con una respuesta negativa para las primeras dos cuestiones; completitud y consistencia, a pesar de que David Hilbert era un fuerte defensor de una respuesta afirmativa a las tres preguntas, pero aun así quedaba un último interrogante a responder; ¿es posible crear un algoritmo o una serie de pasos secuenciales, que logre determinar si un problema matemático tendrá una solución válida?.
+\newline
+
+Este último interrogante fue finalmente desarrollado y solucionado por Alonzo Church (1903-1995) con el “Teorema de indecidibilidad” y Alan Turing (1912-1954) con su “Problema de la parada”, quienes posteriormente formalizarían las bases para el adelanto de la teoría de computación que actualmente es usada y entendida alrededor del mundo, y que tanto beneficio ha aportado en el avance de la informática y la ingeniería moderna. Pero para entender de una manera más íntegra todos estos conceptos, es importante ahondar en sus protagonistas y sus planteamientos.
+\newline
+
+Alonzo Church fue un matemático y lógico estadounidense \citep{ChurchWiki}, maestro de Alan Turing, quien estableció el "Teorema de indecidibilidad", el cual planteaba que “la lógica de primer orden es indecidible, en el sentido de que no hay ningún algoritmo que permita determinar si un enunciado es universalmente válido o no lo es” \citep{RojasBarba}. Este teorema hacía un amplio uso del cálculo lambda, creado por el mismo, que consiste en un lenguaje de programación especializado y pequeño, que por medio de la sustitución de variables y de la definición de funciones, es capaz de evaluar y expresar las funciones computables existentes \citep{LambdaEcu}.
+\newline
+
+La obra de Church finalmente sería complementada por su alumno Alan Turing, quien fue un “matemático, lógico, científico de la computación, criptógrafo, filósofo, biólogo teórico, maratoniano y corredor de ultradistancia británico” \citep{TuringWiki}, y que realizó muchas contribuciones a la ciencia, entre las cuales se encuentra su amplia participación en criptografía, específicamente en la Segunda Guerra Mundial con el desciframiento de la maquina Enigma, así como la creación del test de Turing para inteligencia artificial, y la elaboración de la Máquina de Turing, que resultaría de gran importancia al ser el “modelo matemático de un dispositivo que se comporta como un autómata finito y que dispone de una cinta de longitud infinita en la que se pueden leer, escribir o borrar símbolos.” \citep{Llopismatesfacil}.
+\newline
+
+Además de todo lo anterior, Turing desarrolló el llamado “Problema de la parada”, el cual consistía en que: “dada una Máquina de Turing M y una palabra w, determinar si M terminará en un número finito de pasos cuando es ejecutada usando w como dato de entrada” \citep{ParadaWiki}. Este problema fue finalmente solucionado, en su artículo 'On Computable Numbers, with an Application to the Entscheidungsproblem' (1936), llegando a la demostración de que ninguna Máquina de Turing puede llevar a cabo el algoritmo de decidibilidad, por lo que resulta siendo no computable, afianzando así el concepto de los problemas indecidibles y siendo un gran avance en la búsqueda de lo que posteriormente sería la teoría de la computabilidad \citep{Llopismatesfacil}.
+\newline
+
+Ambos postulados, el de la “Teorema de indecidibilidad” de Church, y el “Problema de la parada” de Alan Turing, terminan siendo relacionados y consolidados en la Tesis de Church-Turing, en donde se fusionaban todos los conceptos desarrollados por los dos, y que podrían ser resumidos en que: 
+
+"•  Todos los modelos computacionales efectivos son equivalentes a una Máquina de Turing
+
+•	Todo lo que es computable por un humano es computable por una Máquina de Turing
+
+•	Toda función que pueda ser considerada naturalmente como computable, puede ser computada por una Máquina de Turing” \citep{MonicaPrezi}.
+
+
+Como vimos, el concepto de computación fue relacionado inicialmente en la conclusión de diferentes teorías y tesis, como la de Church y Turing, en dónde se especificaba la idea de computación ligada a la decidibilidad de los problemas, y a la capacidad que tienen las Máquinas de Turing, y los algoritmos, de darles solución con los recursos con los que cuentan.
+\newline
+
+Lo mencionado previamente se parece mucho a la actual teoría de la computación, que de acuerdo con el Instituto de Investigación en Ciencias de la Computación de la Universidad de Buenos Aires:  “La teoría de la computación se ocupa de determinar qué problemas pueden ser resueltos computacionalmente y con qué eficiencia. La teoría considera distintos modelos de cómputo, como los autómatas finitos (que son los más sencillos), las Máquinas de Turing (que son las computadoras usuales de hoy en día) y las computadoras cuánticas (cuyo funcionamiento no es digital). […] La teoría de la computación también se encarga de entender el límite entre los problemas computables y los no-computables y, dentro del mundo de lo computable, clasificarlos de acuerdo a su grado de simpleza o dificultad" \citep{Tcompticc}.
+\newline
+
+Finalmente, es indudable el papel que tomaron las matemáticas en el desarrollo de estos conceptos, puesto que la raíz de toda la investigación que resultaría en la definición de la computación tuvo origen en los diferentes problemas y planteamientos matemáticos. Comenzando por la noción de infinito, la teoría de conjuntos y las paradojas de personajes como Georg Cantor, pasando por la 'Crisis de los fundamentos' en los conceptos de verdad y demostración y del “Programa de Hilbert” y su búsqueda por la formalización de las matemáticas, y la posterior solución de las tres preguntas del “Problema de decisión” por parte de Kurt Gödel y sus teoremas de incompletitud, y de Alonzo Church y Alan Turing, quienes darían las estocadas finales en la consolidación de la teoría que sería la base de la tecnología moderna en computación.
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES SECTION
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\medskip
+
+\bibliography{references.bib} 
+
+
+% ==========================
+% ==========================
+% ==========================
+
+}
+\end{document}
