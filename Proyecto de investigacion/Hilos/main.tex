@@ -1,0 +1,108 @@
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Template for a conference paper, prepared for the
+%% Food and Resource Economics Department - IFAS
+%% UNIVERSITY OF FLORIDA
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Version 1.0 // November 2019
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ariel Soto-Caro
+%%  - asotocaro@ufl.edu
+%%  - arielsotocaro@gmail.com
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage{UF_FRED_paper_style}
+
+
+%% ===============================================
+%% Setting the line spacing (3 options: only pick one)
+ \doublespacing
+% \singlespacing
+% \onehalfspacing
+%% ===============================================
+
+\setlength{\droptitle}{-5em} %% Don't touch
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SET THE TITLE
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TITLE:
+\title{Proyecto de investigación - Hilos
+}
+
+% AUTHORS:
+\author{Valentina Jaramillo Raquejo\\% Name author
+    \href{mailto:valentina.jaramillor@udea.edu.co}{\texttt{valentina.jaramillor@udea.edu.co}} %% Email author 1 
+%\and Second Author\\% Name author
+%    \href{mailto:secondauthor@ufl.edu}{\texttt{secondauthor@ufl.edu}}%% Email author 2
+    }
+    
+% DATE:
+\date{\today}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+{\setstretch{.8}
+\maketitle
+% %%%%%%%%%%%%%%%%%%
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BODY OF THE DOCUMENT
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Para poder responder adecuadamente la pregunta “¿Qué es un hilo?”, hay que saber que los hilos o threads son parte constituyente de los núcleos, también llamados cores, en una CPU. Un núcleo es el componente que se encarga de ejecutar todas las instrucciones que se requieren para que los programas funcionen. En una CPU, actualmente, es posible encontrar más de un núcleo, lo cual evidentemente aumentaría la capacidad y simultaneidad en la ejecución de programas en el computador, ya que cada núcleo puede ejecutar una instrucción a la vez. 
+\newline
+
+Ahora bien, un hilo es el flujo o secuencia de instrucciones que se deben realizar en un programa determinado. Si un núcleo tiene 2 hilos, significa que va a estar realizando las instrucciones de cada hilo casi simultáneamente. Esto significa que se va a ir alternando entre las instrucciones de cada hilo, y como esto sucede a gran velocidad, da la sensación de que se ejecutan al mismo tiempo. \citep{Defini}.
+\newline
+
+Un hilo se crea a través de un proceso. Cada vez que se abre una aplicación o un programa, se crea un nuevo hilo que se encargará de todas las instrucciones necesarias de esa aplicación específica, esto quiere decir que cuantos más programas se abran, más hilos se van a crear. Estos son creados por el sistema operativo, y siempre se va a encontrar un primer hilo, o hilo primario, que se encargará de las tareas iniciales, y creará el resto de los hilos dependiendo de la información del usuario y de las instrucciones a realizar. \citep{Hist}.
+\newline
+
+Se puede hablar de la historia de los hilos, y esta se remonta a 1965, donde se empezó a hablar del concepto de hilo como un flujo de instrucciones en secuencia, y esto sucedió con el Sistema de Tiempo Compartido de Berkeley, en el cual a los hilos les llamaban procesos.
+Los procesos realizaban sus interacciones por medio de variables compartidas, semáforos y otros medios similares. En 1970, Max Smith hizo un prototipo de implementación de hilos en Multics; en el cual usó múltiples pilas en un solo proceso pesado para apoyar compilaciones de fondo.
+Por otro lado, el lenguaje de programación PL/I contribuyó en gran medida al avance de los hilos, aproximadamente en el año de 1965. El lenguaje, como lo define IBM, proporcionó una CALL XXX (A, B) TASK; un constructor que bifurcaba un hilo para XXX. Al final no hay certeza en si algún compilador de IBM implementó esta característica, pero se sabe que fue examinada detenidamente mientras se diseñaba Multics, lo cual finalmente resultó en la eliminación de esta.
+Luego, a principios de los 70, Unix tomó partido con su noción "proceso", que se convirtió en un hilo secuencial de control más un espacio de direcciones virtuales (esta noción se derivó directamente del diseño del proceso de Multics ). De este modo, los "procesos", según Unix, son máquinas bastante pesadas. Como no pueden compartir la memoria (cada uno tiene su propio espacio de direcciones), interactúan a través de tuberías, señales, etc. La memoria compartida (que también es un mecanismo pesado) se añadió mucho más tarde.
+Después de algún tiempo, los usuarios de Unix comenzaron a extrañar los viejos procesos que podían compartir la memoria. Esto llevó a la "invención" de los hilos: procesos de estilo antiguo que compartían el espacio de direcciones de un solo proceso Unix. También fueron llamados "ligeros", a modo de contraste con los procesos Unix "pesados". Esta distinción se remonta a finales de los años 70 o principios de los 80, es decir, a los primeros "micronúcleos" (Thoth (precursor del núcleo V y QNX), Ameba, Coro, la familia RIG-Accent-Mach, etc.).
+Por otro lado, los hilos han sido utilizados continuamente en aplicaciones de telecomunicaciones durante mucho tiempo.
+\citep{Tip}.
+\newline
+
+Profundizando más acerca de los dos tipos principales de interrupciones; las de hardware y las de software, sus implementaciones serán explicadas con mayor detalle. 
+\newline
+
+Por parte de las interrupciones de hardware, estas son generadas por los dispositivos de hardware cuando ocurre algo inusual; esto podría ser una pulsación de tecla o un movimiento del mouse o cualquier otra acción. Esto se hace para minimizar el tiempo de ejecución en la CPU, de lo contrario la CPU tendría que comprobar todo el hardware instalado en busca de datos en un gran ciclo (esto se llama "polling") y esto llevaría mucho tiempo. Por ejemplo, un PC IBM estándar tiene dos controladores de interrupción, que son responsables de estas interrupciones de hardware; ambos permiten hasta 8 fuentes de interrupción diferentes (IRQs, solicitudes de interrupción). El segundo controlador se conecta al primero a través de la IRQ 2 por razones de compatibilidad, por ejemplo, si el controlador 1 obtiene una IRQ 2, le entrega la IRQ al controlador 2. Por esto, se pueden manejar hasta 15 fuentes de interrupción de hardware diferentes. Todos los códigos y datos tocados por estos manejadores deben ser bloqueados (a través de las diferentes funciones de bloqueo) para evitar fallos de página en el momento de la interrupción. Debido a que las interrupciones de hardware son activadas con las interrupciones deshabilitadas, el handler o manejador tiene que habilitarlas antes de volver a la ejecución normal del programa. Adicionalmente, una interrupción de hardware debe enviar un comando EOI (fin de la interrupción) al controlador responsable \citep{Hard}.
+\newline
+
+En otro contexto, una interrupción de software es un tipo de interrupción que es causada por una instrucción especial en el conjunto de instrucciones o por una condición excepcional en el propio procesador \citep{Softtech}. Se puede introducir una llamada de servicio que permita que un proceso cause una interrupción de software en otro, con un formato de este tipo: Interrupt(process id, interrupt number). Y otra que le permite a un proceso asociar un handler o manejador con una interrupción, de esta forma: Handle(interrupt number, handler) \citep{Softm}.
+\newline
+
+Las interrupciones de software permiten comunicar sólo un bit de información, el cual significa que ha ocurrido un evento asociado con el número de la interrupción. Normalmente son utilizadas por el sistema operativo para informar un proceso sobre eventos como, por ejemplo, que el usuario tecleó la 'clave de atención', o que una alarma programada por un proceso ha expirado o que se ha superado algún límite, como el tamaño de un archivo o del tiempo virtual.
+\newline
+
+Es importante distinguir entre interrupciones, trampas, interrupciones de software y excepciones. En todos los casos, un evento se procesa de forma asincrónica por algún procedimiento del handler. Los números de interrupción y de trampa son definidos por el hardware que también es responsable de llamar al procedimiento en el espacio del kernel. Se llama a un handler de interrupciones en respuesta a una señal de otro dispositivo, mientras que se llama a un handler de trampas en respuesta a una instrucción ejecutada dentro de la CPU. Los handlers de interrupciones y excepciones del software son activados en el espacio del usuario y se llama a un handler de interrupción de software en respuesta a la invocación de una llamada al sistema. Los números de interrupción de software son definidos por el sistema operativo y las excepciones son definidas y procesadas por el lenguaje de programación \citep{Softm}.
+\newline
+
+La noción de interrupciones de software es algo confusa en algunos entornos como el PC, donde las trampas a las rutinas de E/S proporcionadas por el kernel se denominan interrupciones de software. Hay una instrucción especial en el PC llamada INT que se utiliza para invocar estas trampas. Por ejemplo, la instrucción 'int 16H' ejecuta la rutina de interrupción de la BIOS para procesar el carácter actual recibido del teclado. (Es ejecutada por el handler de interrupciones del kernel Xinu para pedirle al handler de la BIOS del PC que obtenga el carácter del teclado). El término interrupción se utiliza porque estas rutinas son llamadas generalmente por rutinas de interrupción de hardware \citep{Softm}.
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES SECTION
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\medskip
+
+\bibliography{references.bib} 
+
+
+% ==========================
+% ==========================
+% ==========================
+
+}
+\end{document}
