@@ -60,7 +60,7 @@ Para poder responder adecuadamente la pregunta “¿Qué es un hilo?”, hay que
 Ahora bien, un hilo es el flujo o secuencia de instrucciones que se deben realizar en un programa determinado. Si un núcleo tiene 2 hilos, significa que va a estar realizando las instrucciones de cada hilo casi simultáneamente. Esto significa que se va a ir alternando entre las instrucciones de cada hilo, y como esto sucede a gran velocidad, da la sensación de que se ejecutan al mismo tiempo. \citep{Defini}.
 \newline
 
-Un hilo se crea a través de un proceso. Cada vez que se abre una aplicación o un programa, se crea un nuevo hilo que se encargará de todas las instrucciones necesarias de esa aplicación específica, esto quiere decir que cuantos más programas se abran, más hilos se van a crear. Estos son creados por el sistema operativo, y siempre se va a encontrar un primer hilo, o hilo primario, que se encargará de las tareas iniciales, y creará el resto de los hilos dependiendo de la información del usuario y de las instrucciones a realizar. \citep{Hist}.
+Un hilo se crea a través de un proceso. Cada vez que se abre una aplicación o un programa, se crea un nuevo hilo que se encargará de todas las instrucciones necesarias de esa aplicación específica, esto quiere decir que cuantos más programas se abran, más hilos se van a crear. Estos son creados por el sistema operativo, y siempre se va a encontrar un primer hilo, o hilo primario, que se encargará de las tareas iniciales, y creará el resto de los hilos dependiendo de la información del usuario y de las instrucciones a realizar. \citep{Defini2}.
 \newline
 
 Se puede hablar de la historia de los hilos, y esta se remonta a 1965, donde se empezó a hablar del concepto de hilo como un flujo de instrucciones en secuencia, y esto sucedió con el Sistema de Tiempo Compartido de Berkeley, en el cual a los hilos les llamaban procesos.
@@ -74,10 +74,8 @@ Luego, a principios de los 70, Unix tomó partido con su noción "proceso", que 
 \newline
 
 Después de algún tiempo, los usuarios de Unix comenzaron a extrañar los viejos procesos que podían compartir la memoria. Esto llevó a la "invención" de los hilos: procesos de estilo antiguo que compartían el espacio de direcciones de un solo proceso Unix. También fueron llamados "ligeros", a modo de contraste con los procesos Unix "pesados". Esta distinción se remonta a finales de los años 70 o principios de los 80, es decir, a los primeros "micronúcleos" (Thoth (precursor del núcleo V y QNX), Ameba, Coro, la familia RIG-Accent-Mach, etc.).
-\newline
-
 Por otro lado, los hilos han sido utilizados continuamente en aplicaciones de telecomunicaciones durante mucho tiempo.
-\citep{Tip}.
+\citep{Hist}.
 \newline
 
 Para hablar ahora de los tipos de hilos, podemos encontrar los hilos de nivel de usuario; que como su nombre lo indica, son gestionados por el usuario, y los hilos a nivel de núcleo o kernel; que son gestionados por el sistema operativo y operan sobre el kernel, que es un núcleo del sistema operativo.
@@ -92,7 +90,7 @@ Con respecto a los hilos a nivel de kernel, la gestión de los hilos la hace el 
 El kernel mantiene la información de contexto para el proceso como un todo y también para los hilos individuales dentro del proceso. Por otro lado, la programación del kernel se hace en base a los hilos, y así es como el kernel realiza la creación de hilos, la programación y la gestión de estos en su propio espacio. Generalmente, los hilos del kernel se crean y administran más lentamente y administrar que los hilos del usuario.
 \newline
 
-Los hilos a nivel de kernel tienen una serie de ventajas que constan en que el núcleo puede programar simultáneamente múltiples hilos del mismo proceso en múltiples procesos y si se bloquea un hilo de un proceso, el núcleo puede programar otro hilo del mismo proceso. Además de esto, las propias rutinas del kernel pueden ser multi-hilos. Sin embargo, existen algunas desventajas como que los hilos del núcleo son más lentos de crear y administrar que los del usuario, y que la transferencia de control de un hilo a otro dentro del mismo proceso requiere un cambio de modo del kernel. \citep{Softm}.
+Los hilos a nivel de kernel tienen una serie de ventajas que constan en que el núcleo puede programar simultáneamente múltiples hilos del mismo proceso en múltiples procesos y si se bloquea un hilo de un proceso, el núcleo puede programar otro hilo del mismo proceso. Además de esto, las propias rutinas del kernel pueden ser multi-hilos. Sin embargo, existen algunas desventajas como que los hilos del núcleo son más lentos de crear y administrar que los del usuario, y que la transferencia de control de un hilo a otro dentro del mismo proceso requiere un cambio de modo del kernel. \citep{Tip}.
 \newline
 
 En otro enfoque, para entender cómo funcionan o se implementan los hilos a nivel del hardware y del software, y poder diferenciarlos, es necesario entender algunos conceptos básicos. Primero, un solo componente de computación que tiene más de una unidad central de procesamiento independiente (núcleo) es un procesador multinúcleo, estos núcleos leen y ejecutan las instrucciones de cada programa. De esta forma es posible ejecutar instrucciones al mismo tiempo, en paralelo.
@@ -104,11 +102,14 @@ Por esto es por lo que, para tomar ventaja de los múltiples núcleos físicos, 
 Por ejemplo, cada programa que se ejecuta en Windows es un proceso. Cada proceso crea y ejecuta uno o más hilos, llamados hilos de software, para diferenciarlos de los hilos de hardware anteriormente mencionados.
 \newline
 
-Cada proceso tiene al menos un hilo, llamado el hilo principal. Un programador interno del sistema operativo reparte equitativamente los recursos de procesamiento disponibles entre todos los procesos e hilos que tiene que ser ejecutados. Este programador asigna tiempo de procesamiento a cada hilo de software. Cuando el programador de Windows se ejecuta en un microprocesador de varios núcleos, tiene que asignar el tiempo de un hilo de hardware, apoyado por un núcleo físico, a cada hilo de software que necesita ejecutar instrucciones. A modo de analogía, se puede pensar en cada hilo de hardware como una pista de natación y en un hilo de software como un nadador.\citep{Softm}
+Cada proceso tiene al menos un hilo, llamado el hilo principal. Un programador interno del sistema operativo reparte equitativamente los recursos de procesamiento disponibles entre todos los procesos e hilos que tiene que ser ejecutados. Este programador asigna tiempo de procesamiento a cada hilo de software. Cuando el programador de Windows se ejecuta en un microprocesador de varios núcleos, tiene que asignar el tiempo de un hilo de hardware, apoyado por un núcleo físico, a cada hilo de software que necesita ejecutar instrucciones. A modo de analogía, se puede pensar en cada hilo de hardware como una pista de natación y en un hilo de software como un nadador.\citep{vs}
 \newline
 
 El sistema operativo de Windows reconoce cada hilo de hardware como un procesador lógico programable. Cada procesador lógico puede ejecutar el código de un hilo de software. Un proceso que ejecuta código en múltiples hilos de software puede aprovechar los hilos de hardware y los núcleos físicos para ejecutar instrucciones en paralelo. El programador de Windows puede decidir reasignar un hilo de software a otro hilo de hardware para equilibrar el trabajo realizado por cada hilo de hardware. Puesto que normalmente hay muchos otros hilos de software esperando obtener  tiempo de procesamiento, el equilibrio de carga hará posible que estos otros hilos ejecuten sus instrucciones organizando los recursos disponibles.
-\citep{Softm}.
+\citep{vs}.
+\newline
+
+Todas estas características no siempre están disponibles para ser programadas en todos los lenguajes de programación, ya que cada uno tiene sus particularidades, y algunos pueden o no soportar la función de multi-hilo. Un ejemplo de un lenguaje de programación que puede usar librerías con funcionalidades de multi-hilo, es el lenguaje C, en el cual, con la librería pthreads o POSIX Threads, es posible crear programas que tengan más de un flujo de ejecución de instrucciones, lo cual permite que se obtenga una mayor velocidad en los programas.
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
