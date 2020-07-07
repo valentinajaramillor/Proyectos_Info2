@@ -43,6 +43,7 @@ int main()
     thread hilo2(objetoprueba(), 3);   // Se indica el método u operador y el argumento a entregarle (el número 3)
 
     // Se define una expresión lambda de nombre f
+    // Esta expresión lambda imprime el mensaje x veces, dependiendo del número entregado x
     auto f = [](int x) {
         for (int i = 0; i < x; i++)
             cout << "Mensaje de la expresion lambda" << endl;
@@ -54,7 +55,7 @@ int main()
     thread hilo3(f, 3);    // Se indica la expresión a usar y el argumento para entregarle (el número 3)
 
     // A continuación esperamos que todos los hilos terminen de ejecutarse (usando join()), para asegurar la correcta
-    //    ejecución de las instrucciones siguientes
+    //    ejecución de las instrucciones siguientes (si las hay)
 
     hilo1.join(); // Se espera a que termine la ejecución del hilo 1
 
