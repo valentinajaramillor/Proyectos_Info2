@@ -1,4 +1,8 @@
 #include "proyectil.h"
+#include "globo.h"
+#include "mainwindow.h"
+
+extern MainWindow *w;
 
 Proyectil::Proyectil(QGraphicsItem * parent): QObject(), QGraphicsPixmapItem()
 {
@@ -56,5 +60,26 @@ void Proyectil::move()
     vely=vely+g*dt;
     posx=posx+velx*dt;
     posy=posy+vely*dt+(0.5)*g*dt*dt;
+
     setPos(posx,-posy);
+
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for(int i = 0, n = colliding_items.size(); i < n; i++){
+        if(typeid(*(colliding_items[i])) == typeid (Globo)){
+
+            //Increase score
+            w->vidas--;
+            w->actualizar();
+
+            //remove the both
+            scene()->removeItem(this);
+            //delete both
+            delete this;
+        }
+    }
+
+//    if(pos().y() + pixmap().height() < 0){
+//        scene()->removeItem(this);
+//        delete this;
+//    }
 }

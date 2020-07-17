@@ -482,6 +482,7 @@ debug/moc_mainwindow.cpp: ../Glopex/mainwindow.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtGui/qtextoption.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsItem \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsView \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsview.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qscrollarea.h \
@@ -743,8 +744,8 @@ debug/globo.o: ../Glopex/globo.cpp ../Glopex/globo.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtGui/qfontmetrics.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsItem \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsitem.h \
-		../Glopex/proyectil.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
+		../Glopex/proyectil.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtCore/QTimer \
 		C:/Qt/5.12.2/mingw73_32/include/QtCore/qtimer.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtCore/qbasictimer.h \
@@ -988,6 +989,7 @@ debug/inicio.o: ../Glopex/inicio.cpp ../Glopex/inicio.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtGui/qtextoption.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsItem \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsView \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsview.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qscrollarea.h \
@@ -1103,6 +1105,32 @@ debug/main.o: ../Glopex/main.cpp ../Glopex/inicio.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtCore/qfiledevice.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtGui/qvector2d.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtGui/qtouchdevice.h \
+		../Glopex/mainwindow.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QMainWindow \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qmainwindow.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qtabwidget.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qicon.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsScene \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qpen.h \
+		../Glopex/globo.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtCore/QObject \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/QKeyEvent \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/QPainter \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qpainter.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsItem \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsView \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qscrollarea.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qframe.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtCore/QTimer \
+		C:/Qt/5.12.2/mingw73_32/include/QtCore/qtimer.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtCore/qbasictimer.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsTextItem \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QApplication \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qapplication.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtCore/qcoreapplication.h \
@@ -1230,6 +1258,7 @@ debug/mainwindow.o: ../Glopex/mainwindow.cpp ../Glopex/mainwindow.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtGui/qtextoption.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsItem \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsView \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsview.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qscrollarea.h \
@@ -1241,7 +1270,6 @@ debug/mainwindow.o: ../Glopex/mainwindow.cpp ../Glopex/mainwindow.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsTextItem \
 		ui_mainwindow.h \
 		../Glopex/proyectil.h \
-		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt/5.12.2/mingw73_32/include/QtCore/QDebug \
 		C:/Qt/5.12.2/mingw73_32/include/QtGui/QList
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\Glopex\mainwindow.cpp
@@ -1353,7 +1381,30 @@ debug/proyectil.o: ../Glopex/proyectil.cpp ../Glopex/proyectil.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtCore/qfile.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtCore/qfiledevice.h \
 		C:/Qt/5.12.2/mingw73_32/include/QtGui/qvector2d.h \
-		C:/Qt/5.12.2/mingw73_32/include/QtGui/qtouchdevice.h
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qtouchdevice.h \
+		../Glopex/globo.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/QKeyEvent \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/QPainter \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qpainter.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qfontinfo.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qfontmetrics.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsItem \
+		../Glopex/mainwindow.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QMainWindow \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qmainwindow.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qpalette.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qcursor.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qtabwidget.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtGui/qicon.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsView \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qscrollarea.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/qframe.h \
+		C:/Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsTextItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\proyectil.o ..\Glopex\proyectil.cpp
 
 debug/qrc_imagenes.o: debug/qrc_imagenes.cpp 

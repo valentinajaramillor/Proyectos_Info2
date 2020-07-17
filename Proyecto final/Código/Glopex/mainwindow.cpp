@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "proyectil.h"
+#include <QGraphicsScene>
+#include <QGraphicsItem>
+#include <QObject>
+#include <QGraphicsPixmapItem>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -20,10 +24,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
     //setBackgroundBrush(QBrush(QImage(":/images/fondo.jpg")));
-
-
-
-
 
     vidas=3;
     nivel=1;
@@ -47,6 +47,11 @@ void MainWindow::actualizar()
     ui->nivel_lcd->display(nivel);
     //checklost();
 }
+
+void MainWindow::colisionproy()
+{
+
+}
 void MainWindow::spawn()
 {
     //create enemies
@@ -67,7 +72,7 @@ void MainWindow::on_iniciar_button_clicked()
     jugador1->setFlag(QGraphicsItem::ItemIsFocusable);
     jugador1->setFocus();
 
-    jugador1->setPos(50,-50);
+    jugador1->setPos(10,-90);
 
     timer->start(1000);
 

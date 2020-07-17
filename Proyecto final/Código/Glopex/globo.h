@@ -6,15 +6,14 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include <QGraphicsItem>
+#include <QGraphicsPixmapItem>
 
-class Globo:public QGraphicsItem
+class Globo:public QGraphicsPixmapItem
 {
 
 public:
-    Globo();
+    Globo(QGraphicsItem * parent = 0);
     void keyPressEvent(QKeyEvent * event);
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void setDirection(int dir);
     QPixmap imagen;
     int direccion; // 1 derecha, 2 izquierda, 3 arriba

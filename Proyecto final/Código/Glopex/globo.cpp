@@ -2,24 +2,14 @@
 #include "proyectil.h"
 #include "gloyectil.h"
 
-Globo::Globo()
+Globo::Globo(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
     X=40;
     Y=40;
     height = 80;
     width = 80;
 
-}
-
-QRectF Globo::boundingRect() const
-{
-    return QRect(-1*X,-1*Y, height, width);
-
-
-}
-void Globo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    painter->drawPixmap(-1*X,-1*Y, height, width, QPixmap(":/imagenes glopex/globo rojo.png"));
+    setPixmap(QPixmap(":/imagenes glopex/globo rojo.png"));
 }
 
 void Globo::move()
@@ -61,9 +51,9 @@ void Globo::keyPressEvent(QKeyEvent *event)
         gloyectil->calcular();
 
 
-        gloyectil->setPosx(x());
+        gloyectil->setPosx(x()+35);
         gloyectil->setPosy(y());
-        gloyectil->setPos(x(),y());
+        gloyectil->setPos(x()+35,y());
 
 
         scene()->addItem(gloyectil);
@@ -76,9 +66,9 @@ void Globo::keyPressEvent(QKeyEvent *event)
         gloyectil->calcular();
 
 
-        gloyectil->setPosx(x());
-        gloyectil->setPosy(y()-20);
-        gloyectil->setPos(x(),y()-20);
+        gloyectil->setPosx(x()+70);
+        gloyectil->setPosy(y()+20);
+        gloyectil->setPos(x()+70,y()+20);
 
 
         scene()->addItem(gloyectil);
@@ -91,8 +81,8 @@ void Globo::keyPressEvent(QKeyEvent *event)
         gloyectil->calcular();
 
         gloyectil->setPosx(x());
-        gloyectil->setPosy(y()-20);
-        gloyectil->setPos(x(),y()-20);
+        gloyectil->setPosy(y()+20);
+        gloyectil->setPos(x(),y()+20);
 
 
         scene()->addItem(gloyectil);

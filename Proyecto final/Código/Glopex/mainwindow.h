@@ -25,6 +25,7 @@ public:
     int vidas;
     int nivel;
     void actualizar();
+    void colisionproy();
 
 public slots:
     void spawn();
