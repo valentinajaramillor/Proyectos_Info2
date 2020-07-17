@@ -1,0 +1,12 @@
+debug/globo.o
+debug/gloyectil.o
+debug/iman.o
+debug/inicio.o
+debug/main.o
+debug/mainwindow.o
+debug/proyectil.o
+debug/qrc_imagenes.o
+debug/moc_gloyectil.o
+debug/moc_inicio.o
+debug/moc_mainwindow.o
+debug/moc_proyectil.o

@@ -1,0 +1,12 @@
+release/globo.o
+release/gloyectil.o
+release/iman.o
+release/inicio.o
+release/main.o
+release/mainwindow.o
+release/proyectil.o
+release/qrc_imagenes.o
+release/moc_gloyectil.o
+release/moc_inicio.o
+release/moc_mainwindow.o
+release/moc_proyectil.o

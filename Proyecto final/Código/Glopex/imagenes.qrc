@@ -1,2 +1,7 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>imagenes glopex/globo amarillo.png</file>
+        <file>imagenes glopex/globo rojo.png</file>
+        <file>imagenes glopex/triangulo.png</file>
+    </qresource>
+</RCC>
