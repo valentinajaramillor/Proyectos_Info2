@@ -30,6 +30,8 @@ public:
     QLabel *tiempo_label;
     QLCDNumber *tiempo_lcd;
     QPushButton *iniciar_button;
+    QLabel *vidas_label;
+    QLCDNumber *vidas_lcd;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -67,6 +69,15 @@ public:
         QFont font1;
         font1.setPointSize(11);
         iniciar_button->setFont(font1);
+        vidas_label = new QLabel(centralwidget);
+        vidas_label->setObjectName(QString::fromUtf8("vidas_label"));
+        vidas_label->setGeometry(QRect(20, 120, 71, 21));
+        vidas_label->setFont(font);
+        vidas_lcd = new QLCDNumber(centralwidget);
+        vidas_lcd->setObjectName(QString::fromUtf8("vidas_lcd"));
+        vidas_lcd->setGeometry(QRect(10, 160, 91, 51));
+        vidas_lcd->setStyleSheet(QString::fromUtf8("background-color: rgb(40, 25, 255);\n"
+"font: 12pt \"Rockwell\";"));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -80,6 +91,7 @@ public:
         nivel_label->setText(QApplication::translate("MainWindow", "Nivel", nullptr));
         tiempo_label->setText(QApplication::translate("MainWindow", "Tiempo", nullptr));
         iniciar_button->setText(QApplication::translate("MainWindow", "INICIAR", nullptr));
+        vidas_label->setText(QApplication::translate("MainWindow", "Vidas", nullptr));
     } // retranslateUi
 
 };

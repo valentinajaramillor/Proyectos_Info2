@@ -71,7 +71,9 @@ OBJECTS       = debug/globo.o \
 		debug/moc_mainwindow.o \
 		debug/moc_proyectil.o
 
-DIST          =  ..\Glopex\globo.h \
+DIST          = imagenes \
+		glopex/gloyectil \
+		rojo.png ..\Glopex\globo.h \
 		..\Glopex\gloyectil.h \
 		..\Glopex\iman.h \
 		..\Glopex\inicio.h \
@@ -128,6 +130,7 @@ compiler_rcc_clean:
 debug/qrc_imagenes.cpp: ../Glopex/imagenes.qrc \
 		C:/Qt/5.12.2/mingw73_32/bin/rcc.exe \
 		../Glopex/imagenes\ glopex/triangulo.png \
+		../Glopex/imagenes\ glopex/gloyectil\ rojo.png \
 		../Glopex/imagenes\ glopex/globo\ rojo.png \
 		../Glopex/imagenes\ glopex/globo\ amarillo.png
 	C:\Qt\5.12.2\mingw73_32\bin\rcc.exe -name imagenes ..\Glopex\imagenes.qrc -o debug\qrc_imagenes.cpp

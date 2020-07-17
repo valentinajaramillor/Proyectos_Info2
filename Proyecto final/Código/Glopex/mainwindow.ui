@@ -106,6 +106,38 @@ font: 12pt &quot;Rockwell&quot;;</string>
      <string>INICIAR</string>
     </property>
    </widget>
+   <widget class="QLabel" name="vidas_label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Vidas</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="vidas_lcd">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>91</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(40, 25, 255);
+font: 12pt &quot;Rockwell&quot;;</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

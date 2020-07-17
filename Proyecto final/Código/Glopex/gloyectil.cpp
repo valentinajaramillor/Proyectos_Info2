@@ -12,12 +12,11 @@ Gloyectil::Gloyectil(QGraphicsItem * parent): QObject(), QGraphicsPixmapItem()
     setPos(posx,posy);
 
     //draw the bullet
-    setPixmap(QPixmap("://imagenes glopex/triangulo.png"));
+    setPixmap(QPixmap("://imagenes glopex/gloyectil rojo.png"));
 
     //connect
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this, SLOT(move()));
-
 
 }
 

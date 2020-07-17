@@ -22,6 +22,41 @@ MainWindow::MainWindow(QWidget *parent)
     //setBackgroundBrush(QBrush(QImage(":/images/fondo.jpg")));
 
 
+
+
+
+    vidas=3;
+    nivel=1;
+
+    //Spawn enemies
+    timer = new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(spawn()));
+
+    actualizar();
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::actualizar()
+{
+    // This will display the lives and level
+    ui->vidas_lcd->display(vidas);
+    ui->nivel_lcd->display(nivel);
+    //checklost();
+}
+void MainWindow::spawn()
+{
+    //create enemies
+    Proyectil * proyectil = new Proyectil();
+    scene->addItem(proyectil);
+}
+
+
+void MainWindow::on_iniciar_button_clicked()
+{
     //Create an Item to put into the scene
     jugador1 = new Globo();
 
@@ -34,34 +69,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     jugador1->setPos(50,-50);
 
-
-    //create the score/Health
-    //score = new Score();
-    //scene->addItem(score);
-    //health = new Health();
-    //health->setPos(health->x(),health->y()+25);
-    //scene->addItem(health);
-
-
-    //Spawn enemies
-    QTimer * timer = new QTimer();
-    connect(timer,SIGNAL(timeout()),this,SLOT(spawn()));
     timer->start(1000);
 
-//    //play background music
-//    QMediaPlayer * music = new QMediaPlayer;
-//    music->setMedia(QUrl("qrc:/sounds/hola.mp3"));
-//    music->play();
 }
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-void MainWindow::spawn()
-{
-    //create enemies
-    Proyectil * proyectil = new Proyectil();
-    scene->addItem(proyectil);
-}
-

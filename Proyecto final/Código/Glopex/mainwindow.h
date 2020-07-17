@@ -22,13 +22,20 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    int vidas;
+    int nivel;
+    void actualizar();
 
 public slots:
     void spawn();
+
+private slots:
+    void on_iniciar_button_clicked();
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene * scene;
     Globo * jugador1;
+    QTimer * timer;
 };
 #endif // MAINWINDOW_H
